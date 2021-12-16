@@ -367,7 +367,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-16 19:14:44" itemprop="dateModified" datetime="2021-12-16T19:14:44+08:00">2021-12-16</time>
+                <time title="修改时间：2021-12-16 19:40:52" itemprop="dateModified" datetime="2021-12-16T19:40:52+08:00">2021-12-16</time>
               </span>
 
           
@@ -381,59 +381,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span>
-
-<h2 id="坐标与变换"><a href="#坐标与变换" class="headerlink" title="坐标与变换"></a>坐标与变换</h2><h3 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h3><p>使用python numpy库 <code>import numpy as np</code></p>
-<h4 id="向量创建"><a href="#向量创建" class="headerlink" title="向量创建"></a>向量创建</h4><ul>
-<li><p>创建行向量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br></pre></td></tr></table></figure></li>
-<li><p>创建列向量(矩阵转置)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]]).T <span class="comment"># numpy中的矩阵转置方法,对于一维数组是无效的,注意这里用了两个方括号</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="向量运算"><a href="#向量运算" class="headerlink" title="向量运算"></a>向量运算</h4><ul>
-<li><p>向量的加法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">u = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]]).T</span><br><span class="line">v = np.array([[<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]]).T</span><br><span class="line">w = u + v</span><br></pre></td></tr></table></figure></li>
-<li><p>向量数乘</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">u = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]]).T</span><br><span class="line">w = <span class="number">3</span> * u</span><br></pre></td></tr></table></figure></li>
-<li><p>向量内积</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">u = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) <span class="comment"># 直接使用numpy的内积运算函数dot,参数必须是用一维数组表示的行向量</span></span><br><span class="line">v = np.array([<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">w = np.dot(u, v)</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">u = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]])    <span class="comment"># 这里用的二维数组,内积相当于向量点乘</span></span><br><span class="line">v = np.array([[<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]]).T</span><br><span class="line">w = np.dot(u, v)</span><br></pre></td></tr></table></figure></li>
-<li><p>向量外积</p>
-<p>二维的外积得到的是一个数值</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">u = np.array([<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">v = np.array([<span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">w = np.cross(u, v)</span><br></pre></td></tr></table></figure>
-
-<p>三维的外积得到一个向量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">u = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">v = np.array([<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">w = np.cross(u, v)</span><br></pre></td></tr></table></figure>
-
-<p>更多维会报错</p>
-</li>
-</ul>
-<h3 id="向量的基底"><a href="#向量的基底" class="headerlink" title="向量的基底"></a>向量的基底</h3><ul>
-<li>向量的基底需要满足<ol>
-<li>向量的数量等于维度数量</li>
-<li>向量之间满足线性无关</li>
-</ol>
-</li>
-</ul>
-<h3 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">			 [<span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">			 [<span class="number">5</span>, <span class="number">6</span>],</span><br><span class="line">			 [<span class="number">7</span>, <span class="number">8</span>]])</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="built_in">print</span>(a.shape)</span><br></pre></td></tr></table></figure>
-
-<h4 id="特殊的矩阵"><a href="#特殊的矩阵" class="headerlink" title="特殊的矩阵"></a>特殊的矩阵</h4><ol>
-<li><p>方阵</p>
-</li>
-<li><p>转置与对称矩阵</p>
-</li>
-<li><p>零阵</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A = np.zeros([<span class="number">5</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure></li>
-<li><p>对角矩阵</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A = np.diag([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br></pre></td></tr></table></figure></li>
-<li><p>单位矩阵</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">I = np.eye(<span class="number">5</span>)</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="矩阵乘向量"><a href="#矩阵乘向量" class="headerlink" title="矩阵乘向量"></a>矩阵乘向量</h3><p>一个举证和一个列向量相乘的过程可以理解为对位于原矩阵各列的列向量重新进行线性组合的过程,在线性组合的运算过程中,结果中的各个系数就是参与乘法运算的列向量中所对应的各个成分</p>
-
+          <h2 id="坐标与变换"><a href="#坐标与变换" class="headerlink" title="坐标与变换"></a>坐标与变换</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -703,7 +659,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-16 19:22:05" itemprop="dateModified" datetime="2021-12-16T19:22:05+08:00">2021-12-16</time>
+                <time title="修改时间：2021-12-16 19:42:26" itemprop="dateModified" datetime="2021-12-16T19:42:26+08:00">2021-12-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -730,47 +686,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span>
-
-<h2 id="Just-a-GIF"><a href="#Just-a-GIF" class="headerlink" title="Just a GIF"></a>Just a GIF</h2><blockquote>
-<p>GIF分帧比较,Datamatrix码</p>
-</blockquote>
-<h3 id="GIF分帧相同部分比较"><a href="#GIF分帧相同部分比较" class="headerlink" title="GIF分帧相同部分比较"></a>GIF分帧相同部分比较</h3><p>这题挺像国赛那个<strong>running_pixel</strong>的,当时没做出来,对着gif想了好久</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E:\university\extention\CTF\software\MISC\ffmpeg\ffmpeg-4.4-full_build\bin\ffmpeg.exe -i ./Just_a_GIF.gif ./photo1/%d.png</span><br></pre></td></tr></table></figure>
-
-<p>也是首先分帧,分出来451张图片,11张循环,同running_pixel,同一帧每次循环会有些许不同,写脚本,把不同的点变成黑的,然后相同的地方白的</p>
-<p><img src="E:\Blog\source_posts\Misc刷题记录\just_a_gif.png" alt="just_a_gif"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line">img = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">452</span>):</span><br><span class="line">    img.append(cv2.imread(<span class="string">&#x27;&#123;&#125;.png&#x27;</span>.<span class="built_in">format</span>(i), cv2.IMREAD_UNCHANGED))  <span class="comment"># 这里第三个参数是读入所有通道的色彩信息，如果有alpha的话会读四个通道</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(img[<span class="number">1</span>])</span><br><span class="line">a, b, c = img[<span class="number">1</span>].shape  <span class="comment"># shape方法： shape[0]图像的高,shape[1]图像的宽,shape[2]图像的色彩通道数量</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(a):</span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(b): </span><br><span class="line">        <span class="keyword">if</span> img[<span class="number">0</span>][x, y, <span class="number">0</span>] - img[<span class="number">11</span>][x, y, <span class="number">0</span>] == <span class="number">0</span> &amp; img[<span class="number">0</span>][x, y, <span class="number">1</span>] - img[<span class="number">11</span>][x, y, <span class="number">1</span>] == <span class="number">0</span> &amp; img[<span class="number">0</span>][x, y, <span class="number">2</span>] - img[<span class="number">11</span>][x, y, <span class="number">2</span>] == <span class="number">0</span>:</span><br><span class="line">            img[<span class="number">0</span>][x, y, <span class="number">1</span>] = <span class="number">255</span></span><br><span class="line">            img[<span class="number">0</span>][x, y, <span class="number">2</span>] = <span class="number">255</span></span><br><span class="line">            img[<span class="number">0</span>][x, y, <span class="number">0</span>] = <span class="number">255</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            img[<span class="number">0</span>][x, y, <span class="number">1</span>] = <span class="number">0</span></span><br><span class="line">            img[<span class="number">0</span>][x, y, <span class="number">2</span>] = <span class="number">0</span></span><br><span class="line">            img[<span class="number">0</span>][x, y, <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">i = <span class="number">1</span> <span class="comment"># 这里从1开始到11,0有一点点小问题因为我用0做板了,</span></span><br><span class="line"><span class="keyword">while</span> i &lt; <span class="number">440</span>:  <span class="comment"># 共451张图片,因为每个循环是那一帧和11张图片后的那一帧作比较,所以最后11张不需要遍历</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(a):</span><br><span class="line">        <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(a):  <span class="comment"># 遍历像素</span></span><br><span class="line">            <span class="keyword">if</span> img[i][x, y, <span class="number">0</span>] - img[i+<span class="number">11</span>][x, y, <span class="number">0</span>] == <span class="number">0</span> &amp; img[i][x, y, <span class="number">1</span>] - img[i+<span class="number">11</span>][x, y, <span class="number">1</span>] == <span class="number">0</span> &amp; img[i][x, y, <span class="number">2</span>] - img[i+<span class="number">11</span>][x, y, <span class="number">2</span>] == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                img[<span class="number">0</span>][x, y, <span class="number">1</span>] = <span class="number">0</span></span><br><span class="line">                img[<span class="number">0</span>][x, y, <span class="number">2</span>] = <span class="number">0</span></span><br><span class="line">                img[<span class="number">0</span>][x, y, <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">    i += <span class="number">11</span> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&quot;mywindow&quot;</span>, img[<span class="number">0</span>])</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-
-<p>每一帧都跑一遍得到11张图片,9张是码的一部分,还有两张顺序提示,拼起来,是Data Matrix</p>
-<p><img src="E:\Blog\source_posts\Misc刷题记录\just_a_gif_suipian.png" alt="datamatrix"></p>
-<h3 id="Datamatrix码-bctester扫码工具"><a href="#Datamatrix码-bctester扫码工具" class="headerlink" title="Datamatrix码(bctester扫码工具)"></a>Datamatrix码(bctester扫码工具)</h3><p>用bctester扫码,得到flag</p>
-<p>![just_a_gif datamatrix](E:\Blog\source_posts\Misc刷题记录\just_a_gif datamatrix.png)</p>
-<h2 id="Nuclear-wastewater"><a href="#Nuclear-wastewater" class="headerlink" title="Nuclear_wastewater"></a>Nuclear_wastewater</h2><p>两个附件,一个二维码,一个加密zip</p>
-<p>![Nuclear wastewater扫码结果](E:\Blog\source_posts\Misc刷题记录\Nuclear wastewater扫码结果.png)</p>
-<p>zip不是伪加密,密码也爆破不出来,猜想是二维码颜色里隐藏了信息</p>
-<h3 id="rgb隐藏ASCII码"><a href="#rgb隐藏ASCII码" class="headerlink" title="rgb隐藏ASCII码"></a>rgb隐藏ASCII码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&#x27;Nuclear wastewater.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line">a = <span class="built_in">set</span>() <span class="comment"># 这里用集合为了去掉重复的</span></span><br><span class="line">width, height = img.size</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, width):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, height):</span><br><span class="line">        pixel = img.getpixel((i, j))</span><br><span class="line">        a.add(pixel)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(a))</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;(47, 0, 0), (0, 89, 0), (204, 0, 0), (35, 0, 0), (0, 0, 105), (0, 115, 0), (116, 0, 0), (0, 128, 0), (0, 0, 89), (0, 0, 153), (0, 64, 0), (0, 35, 0), (74, 0, 0), (58, 0, 0), (0, 0, 82), (0, 0, 36), (135, 0, 0), (0, 147, 0), (0, 0, 228), (26, 0, 0), (0, 162, 0), (0, 0, 75), (85, 0, 0), (69, 0, 0), (82, 0, 0), (0, 0, 38), (0, 58, 0), (0, 69, 0), (70, 0, 0), (144, 0, 0), (0, 247, 0), (0, 0, 205), (0, 86, 0), (0, 75, 0), (255, 255, 255), (126, 0, 0), (0, 33, 0), (63, 0, 0), (0, 0, 116), (0, 169, 0), (177, 0, 0), (0, 0, 207), (0, 222, 0), (89, 0, 0), (0, 50, 0), (0, 116, 0), (0, 105, 0), (0, 10, 0), (104, 0, 0), (0, 67, 0), (0, 188, 0), (0, 82, 0), (0, 0, 47), (166, 0, 0), (193, 0, 0), (0, 0, 19), (0, 0, 83), (0, 106, 0), (16, 0, 0), (0, 0, 40), (0, 0, 104), (62, 0, 0), (0, 163, 0), (0, 0, 58), (75, 0, 0), (0, 218, 0), (0, 0, 241), (0, 101, 0), (0, 167, 0), (0, 244, 0), (14, 0, 0), (0, 0, 33), (101, 0, 0), (0, 0, 115), (0, 0, 69), (22, 0, 0), (0, 0, 35), (0, 157, 0), (201, 0, 0), (0, 0, 126), (0, 0, 245), (0, 38, 0), (200, 0, 0), (0, 104, 0), (0, 170, 0), (38, 0, 0), (112, 0, 0), (0, 0, 101), (115, 0, 0), (0, 0, 64), (0, 0, 183), (0, 0, 192), (64, 0, 0), (0, 4, 0), (0, 0, 21), (0, 0, 158), (0, 72, 0), (105, 0, 0), (0, 0, 112), (0, 0, 240)&#125;</span><br><span class="line">100</span><br></pre></td></tr></table></figure>
-
-<p>可见rgb信息都是单通道的颜色,除了(255,255,255)(白色),可以猜测在rgb通道里隐藏了ASCII码</p>
-<h3 id="按频率分析转换可显示字符（32-126）"><a href="#按频率分析转换可显示字符（32-126）" class="headerlink" title="按频率分析转换可显示字符（32~126）"></a>按频率分析转换可显示字符（32~126）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"></span><br><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&#x27;Nuclear wastewater.png&#x27;</span>)</span><br><span class="line">width, height = img.size</span><br><span class="line">a = []	<span class="comment"># 字符列表</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(width):</span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(height):</span><br><span class="line">        pixel = img.getpixel((x, y))</span><br><span class="line">        r, g, b = (pixel[<span class="number">0</span>], pixel[<span class="number">1</span>], pixel[<span class="number">2</span>])</span><br><span class="line">        <span class="keyword">if</span> r != <span class="number">255</span> <span class="keyword">and</span> <span class="number">32</span> &lt;= r &lt;= <span class="number">126</span>:	<span class="comment"># 筛选可显示字符</span></span><br><span class="line">            a.append(<span class="built_in">chr</span>(r))</span><br><span class="line">        <span class="keyword">if</span> g != <span class="number">255</span> <span class="keyword">and</span> <span class="number">32</span> &lt;= g &lt;= <span class="number">126</span>:</span><br><span class="line">            a.append(<span class="built_in">chr</span>(g))</span><br><span class="line">        <span class="keyword">if</span> b != <span class="number">255</span> <span class="keyword">and</span> <span class="number">32</span> &lt;= b &lt;= <span class="number">126</span>:</span><br><span class="line">            a.append(<span class="built_in">chr</span>(b))</span><br><span class="line"><span class="built_in">print</span>(Counter(a))	<span class="comment"># Counter词频统计,字典类型</span></span><br><span class="line"><span class="comment"># 下面将字典类型按照values排序</span></span><br><span class="line">c = <span class="built_in">sorted</span>(Counter(a).items(), key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>], reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># sorted 第一个参数是一个可迭代的类型,key参数是排序满足的表达式</span></span><br><span class="line"><span class="comment"># lambda 第一个冒号前是参数,冒号后是表达式,这里x[1]指的是字典的values</span></span><br><span class="line"><span class="comment"># 排完序的c是一个列表,列表是(key,value)的元组</span></span><br><span class="line"><span class="built_in">str</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> c:</span><br><span class="line">    <span class="built_in">str</span> += i[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Counter(&#123;&#x27;t&#x27;: 1800, &#x27;h&#x27;: 1700, &#x27;e&#x27;: 1600, &#x27;K&#x27;: 1500, &#x27;E&#x27;: 1400, &#x27;Y&#x27;: 1300, &#x27;i&#x27;: 1200, &#x27;s&#x27;: 1100, &#x27;:&#x27;: 1000, &#x27;#&#x27;: 900, &#x27;R&#x27;: 800, &#x27;@&#x27;: 700, &#x27;/&#x27;: 600, &#x27;&amp;&#x27;: 500, &#x27;p&#x27;: 400, &#x27;~&#x27;: 300, &#x27;!&#x27;: 200, &#x27;(&#x27;: 100, &#x27;?&#x27;: 100, &#x27;$&#x27;: 100, &#x27;V&#x27;: 100, &#x27;J&#x27;: 100, &#x27;F&#x27;: 100, &#x27;j&#x27;: 100, &#x27;U&#x27;: 100, &#x27;C&#x27;: 100, &#x27;S&#x27;: 100, &#x27;2&#x27;: 100, &#x27;H&#x27;: 100, &#x27;&gt;&#x27;: 100&#125;)</span><br><span class="line">theKEYis:#R@/&amp;p~!(?$VJFjUCS2H&gt;</span><br></pre></td></tr></table></figure>
-
-<p>注意到频率为100的有很多，把这些去掉得到压缩包解压密码：<code>#R@/&amp;p~!</code></p>
-<h3 id="零宽隐写"><a href="#零宽隐写" class="headerlink" title="零宽隐写"></a>零宽隐写</h3><p>txt文档里的内容是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">‌‌‌‌‌‌‌‍‎‍‎‌‌‌‌‌‌‌‍‎‍‌‌‌‌‌‌‌‌‍‎‍‎‌‌‌‌‌‌‌‍‎‍‍‌‍‌‎‌‌‍‍‍‎‌‌‌‌‌‌‌‌‍‎‎‍‌‍‍‌‌‌‍‍‎‎‌‌‌‌‌‌‌‌‍‎‍‍‌‌‌‌‌‌‌‍‎‎‌‌‍‌‎‎‎‍‌‌‍‌‍‌‌‎‎‍‎‌‌‎‌‌‍‍‌‌‍‎‍‌‍‍‌‍‌‎‌‌‎‌‌‍‍‌‍‍‌‍‎‎‎‎‎‍‌‍‌‍‌‍‎‍‍‌‍‌‌‌‌‌‌‌‎‍‍‍‌‌‌‌‌‌‍‌‎‎‌‌‌‌‌‌‌‍‍‌‎‎‌‌‌‌‌‌‍‍‌‎‌‌‌‌‌‌‌‍‌‎‎‌‌‌‌‌‌‌‍‍‍‍‌‌‍‌‌‎‍‌‎‌‌‍‌‍‍‍‎‍‎‍‎‌‍‌‌‌‌‌‌‌‎‍‍‍‌‌‌‌‌‌‍‌‌‍‌‌‌‌‌‌‌‍‌‌‎‍‌‌‌‌‌‌‌‍‎‍‍‌‍‌‎‌‌‌‌‍‌‌‌‍‌‍‎‍‌‌‍‎‎OIENKMAJOLEOKMAJOHECLHBCPGFDLNBIPAFFLPBKPIFNLEBBPPFKLFBAPEFBLJBMPHFCLEBBPMFJLEBBPLFOLHBCPCFHLNBIPDFGLHBCPPFKLIBNPHFCLDBGPGFDLBBEPPFKLHBCPPFKLMBJPDFGLCBHPHFCLBBEPIFNLNBIPOFLLMBJPDFGLBBEPEFBLBBEPPFKLGBDPOFLLABFPMFJLABFPCFHLNBIPDFGLMBJPEFBLIBNPHFCLLBOPOFLLBBEPIFNLDBGPAFFKAAFOPEKKDAGOGEDKJAMOAEFKLAOOIENLIBNPEFBLLBOPJFMLFBAPLFOLFBAPNFILEBBPLFOLFBAPAFFLJBMPHFCLJBMPBFELIBNPHFCLIBNPNFILBBEPPFKKPAKOHECKMAJOAEFKKAPOIENKFAAOLEOKHACOPEKKAAFOPEKKAAFOFEAKJAMOHECKLAOODEGKMAJOAEFKPAKONEIKBAEOIENKAAFODEGKAAFOPEKKLAOOOELKJAMOAEFKGADOFEAKEABOLEOKOALOLEOKJAMOAEFKIANOLEOKIANOEEBKFAAOHECKBAEOIENKJAMOKEPKMAJPMFJLCBHPEFBLNBI‌‍‌‌‌‍‍‌‎‌‍‌‍‌‌‌‍‌‎‎‎‍‌‍‎‎‌‌‍‎‍‌‎</span><br></pre></td></tr></table></figure>
-
-<p>可以看见有不可显示的字符<code>\u200C</code>,<code>\u200B</code>,<code>\u200E</code>,零宽隐写</p>
-<p>![Nuclear wastewater escape](E:\Blog\source_posts\Misc刷题记录\Nuclear wastewater escape.png)</p>
-<p>在线0宽解密网站:<a target="_blank" rel="noopener" href="http://330k.github.io/misc_tools/unicode_steganography.html">Unicode Steganography with Zero-Width Characters (330k.github.io)</a></p>
-<p>![Nuclear wastewater decode1](E:\Blog\source_posts\Misc刷题记录\Nuclear wastewater decode1.png)</p>
-<p>勾选三个字符,解密![Nuclear wastewater decode2](E:\Blog\source_posts\Misc刷题记录\Nuclear wastewater decode2.png)</p>
-<p>得到<code>2021年4月13日，核废水在Citrix县的CTX1市尤为严重</code></p>
-<h3 id="CitrixCTX1解码"><a href="#CitrixCTX1解码" class="headerlink" title="CitrixCTX1解码"></a>CitrixCTX1解码</h3><p>cyberchef上有解码,两次以后得到flag</p>
-<p>![Nuclear wastewater CTX1](E:\Blog\source_posts\Misc刷题记录\Nuclear wastewater CTX1.png)</p>
-
+          <p>两道misc</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/02/Misc%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -894,7 +818,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-16 19:23:47" itemprop="dateModified" datetime="2021-12-16T19:23:47+08:00">2021-12-16</time>
+                <time title="修改时间：2021-12-16 19:43:48" itemprop="dateModified" datetime="2021-12-16T19:43:48+08:00">2021-12-16</time>
               </span>
 
           
@@ -908,19 +832,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span>
-
-<h2 id="开机图形化页面加载失败"><a href="#开机图形化页面加载失败" class="headerlink" title="开机图形化页面加载失败"></a>开机图形化页面加载失败</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dev/sda1: Inodes that were part of a corrupted orphan linked list found.</span><br><span class="line">/dev/sda1: UNEXPECTED INCONSISTENCY:; RUN fsck MANUALLY</span><br><span class="line">        (i.e., without -a or -p options)</span><br><span class="line">fsck exited with status code 4</span><br><span class="line">The root filesystem on /dev/sda1 requires a manual fsck</span><br><span class="line">modprobe: module ehci-orion not found in modules.dep</span><br><span class="line"></span><br><span class="line">BusyBox v1.22.1 (Debian 1:1.22.0-9+deb8u1) built-in shell (ash)</span><br><span class="line">Enter &#x27;help&#x27; for a list of built-in commands.</span><br><span class="line"></span><br><span class="line">/bin/sh: can&#x27;t access tty; job control turned off</span><br><span class="line">(initramfs) _</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>解决方案:<ol>
-<li>输入<code>fsck /dev/sda1</code></li>
-<li><code>enter</code>默认,也可以根据实际情况调整</li>
-<li><code>reboot</code>重启</li>
-</ol>
-</li>
-</ul>
-
+          <p>ubuntu报错</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/07/09/ubuntu%E9%94%99%E8%AF%AF%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

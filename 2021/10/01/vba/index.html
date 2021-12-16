@@ -24,19 +24,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="VBA标识符命名规则 字母打头，由字母，数字，下划线组成 字符长度小于40（Excel2002以上中文版本等，可以用汉字且长度可达254个字符） 不能与保留字重名：public， private，dim，goto，next， with，integer，single等  运算符 赋值运算符：&#x3D; 数学运算符：&amp;， +（字符链接符），+（加），-（减）， Mod（取余），\（整除），*（乘），&#x2F;">
+  <meta name="description" content="VBA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="STERIA LAB">
-<meta property="og:url" content="http://example.com/2021/12/16/vba/index.html">
+<meta property="og:title" content="机器学习线性代数基础">
+<meta property="og:url" content="http://example.com/2021/10/01/vba/index.html">
 <meta property="og:site_name" content="STERIA LAB">
-<meta property="og:description" content="VBA标识符命名规则 字母打头，由字母，数字，下划线组成 字符长度小于40（Excel2002以上中文版本等，可以用汉字且长度可达254个字符） 不能与保留字重名：public， private，dim，goto，next， with，integer，single等  运算符 赋值运算符：&#x3D; 数学运算符：&amp;， +（字符链接符），+（加），-（减）， Mod（取余），\（整除），*（乘），&#x2F;">
+<meta property="og:description" content="VBA">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-16T10:35:16.769Z">
-<meta property="article:modified_time" content="2021-12-07T06:52:33.730Z">
+<meta property="article:published_time" content="2021-10-01T05:55:18.000Z">
+<meta property="article:modified_time" content="2021-12-16T11:13:29.795Z">
 <meta property="article:author" content="STEVE">
+<meta property="article:tag" content="vba">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/12/16/vba/">
+<link rel="canonical" href="http://example.com/2021/10/01/vba/">
 
 
 <script id="page-configurations">
@@ -49,7 +50,7 @@
   };
 </script>
 
-  <title> | STERIA LAB</title>
+  <title>机器学习线性代数基础 | STERIA LAB</title>
   
 
 
@@ -194,7 +195,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/16/vba/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/01/vba/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -207,7 +208,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          机器学习线性代数基础
         </h1>
 
         <div class="post-meta">
@@ -218,14 +219,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-12-16 18:35:16" itemprop="dateCreated datePublished" datetime="2021-12-16T18:35:16+08:00">2021-12-16</time>
+              <time title="创建时间：2021-10-01 13:55:18" itemprop="dateCreated datePublished" datetime="2021-10-01T13:55:18+08:00">2021-10-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-07 14:52:33" itemprop="dateModified" datetime="2021-12-07T14:52:33+08:00">2021-12-07</time>
+                <time title="修改时间：2021-12-16 19:13:29" itemprop="dateModified" datetime="2021-12-16T19:13:29+08:00">2021-12-16</time>
               </span>
 
           
@@ -246,7 +247,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="VBA"><a href="#VBA" class="headerlink" title="VBA"></a>VBA</h1><h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><h3 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h3><ol>
+        <h1 id="VBA"><a href="#VBA" class="headerlink" title="VBA"></a>VBA</h1><span id="more"></span>
+
+<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><h3 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h3><ol>
 <li>字母打头，由字母，数字，下划线组成</li>
 <li>字符长度小于40（Excel2002以上中文版本等，可以用汉字且长度可达254个字符）</li>
 <li>不能与保留字重名：<strong>public， private，dim，goto，next， with，integer，single等</strong></li>
@@ -580,6 +583,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vba/" rel="tag"># vba</a>
+          </div>
 
         
 
@@ -587,10 +593,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/12/16/hello-world/" rel="prev" title="Hello World">
-      <i class="fa fa-chevron-left"></i> Hello World
+    <a href="/2021/10/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/" rel="prev" title="机器学习线性代数基础">
+      <i class="fa fa-chevron-left"></i> 机器学习线性代数基础
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/13/%E7%BE%8E%E4%BA%9A/" rel="next" title="美亚">
+      美亚 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -670,16 +679,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

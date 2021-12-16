@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="MIPS体系结构寄存器特点MIPS包含32个通用寄存器($0-$31均为32位),硬件没有强制性指定寄存器的使用规则,但是在实际使用中,这些寄存器的用法都遵循一些列约定,寄存器约定用法引入了一系列的寄存器约定名,在使用寄存器的时候,要尽量用这些约定名和助记符,而不直接引用寄存器编号">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIPS">
+<meta property="og:url" content="http://example.com/2021/04/07/MIPS/index.html">
+<meta property="og:site_name" content="STERIA LAB">
+<meta property="og:description" content="MIPS体系结构寄存器特点MIPS包含32个通用寄存器($0-$31均为32位),硬件没有强制性指定寄存器的使用规则,但是在实际使用中,这些寄存器的用法都遵循一些列约定,寄存器约定用法引入了一系列的寄存器约定名,在使用寄存器的时候,要尽量用这些约定名和助记符,而不直接引用寄存器编号">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/04/07/MIPS/%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F.png">
+<meta property="og:image" content="http://example.com/2021/04/07/MIPS/R%E5%9E%8B%E6%8C%87%E4%BB%A4.png">
+<meta property="og:image" content="http://example.com/2021/04/07/MIPS/I%E5%9E%8B%E6%8C%87%E4%BB%A4.png">
+<meta property="og:image" content="http://example.com/2021/04/07/MIPS/J%E5%9E%8B%E6%8C%87%E4%BB%A4.png">
+<meta property="og:image" content="http://example.com/2021/04/07/MIPS/%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="http://example.com/2021/04/07/MIPS/PC%E7%9B%B8%E5%AF%B9%E5%AF%BB%E5%9D%80.png">
+<meta property="og:image" content="http://example.com/2021/04/07/MIPS/%E8%BF%87%E7%A8%8B.png">
+<meta property="og:image" content="http://example.com/2021/04/07/MIPS/64%E7%A9%BA%E9%97%B4.png">
+<meta property="og:image" content="http://example.com/2021/04/07/MIPS/32%E7%A9%BA%E9%97%B4.png">
+<meta property="article:published_time" content="2021-04-07T06:16:20.000Z">
+<meta property="article:modified_time" content="2021-04-08T01:33:58.000Z">
+<meta property="article:author" content="STEVE">
+<meta property="article:tag" content="mips">
+<meta property="article:tag" content="汇编">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/04/07/MIPS/%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F.png">
+
+<link rel="canonical" href="http://example.com/2021/04/07/MIPS/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MIPS | STERIA LAB</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">STERIA LAB</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">for STEVE</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/07/MIPS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="STEVE">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STERIA LAB">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MIPS
+        </h1>
+
+        <div class="post-meta">
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-07 14:16:20" itemprop="dateCreated datePublished" datetime="2021-04-07T14:16:20+08:00">2021-04-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-08 09:33:58" itemprop="dateModified" datetime="2021-04-08T09:33:58+08:00">2021-04-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mips/" itemprop="url" rel="index"><span itemprop="name">mips</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="MIPS体系结构"><a href="#MIPS体系结构" class="headerlink" title="MIPS体系结构"></a>MIPS体系结构</h2><h3 id="寄存器特点"><a href="#寄存器特点" class="headerlink" title="寄存器特点"></a>寄存器特点</h3><p>MIPS包含32个通用寄存器($0-$31均为32位),硬件没有强制性指定寄存器的使用规则,但是在实际使用中,这些寄存器的用法都遵循一些列约定,寄存器约定用法引入了一系列的寄存器约定名,在使用寄存器的时候,要尽量用这些约定名和助记符,而不直接引用寄存器编号</p>
+<span id="more"></span>
+<table>
+<thead>
+<tr>
+<th align="left">编号</th>
+<th align="center">助记符</th>
+<th align="left">用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="center">zero</td>
+<td align="left">永远为零</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="center">at</td>
+<td align="left">用作汇编器的暂时变量</td>
+</tr>
+<tr>
+<td align="left">2-3</td>
+<td align="center">v0,v1</td>
+<td align="left">子函数调用返回结果,存储表达式或者是函数的返回值</td>
+</tr>
+<tr>
+<td align="left">4-7</td>
+<td align="center">a0-a3</td>
+<td align="left">子函数调用的参数,存储子程序的前4个参数,在子程序调用中释放</td>
+</tr>
+<tr>
+<td align="left">8-15</td>
+<td align="center">t0-t7</td>
+<td align="left">暂时变量,子函数使用时不需要保存与恢复,调用时不保存</td>
+</tr>
+<tr>
+<td align="left">24-25</td>
+<td align="center">t8-t9</td>
+<td align="left">暂时变量子函数使用时不需要保存与回复,调用时不保存</td>
+</tr>
+<tr>
+<td align="left">16-23</td>
+<td align="center">s0-s7</td>
+<td align="left">子函数寄存器变量,在返回之前子函数必须保存和恢复使用过的变量,从而调用函数知道这些寄存器的值没有变化(没有储存到栈上),调用时保存</td>
+</tr>
+<tr>
+<td align="left">26-27</td>
+<td align="center">k0,k1</td>
+<td align="left">通常被中断或异常处理程序使用作为保存一些系统参数</td>
+</tr>
+<tr>
+<td align="left">28</td>
+<td align="center">gp</td>
+<td align="left">全局指针.一些运行系统维护这个指针更方便的存储static和extern变量</td>
+</tr>
+<tr>
+<td align="left">29</td>
+<td align="center">sp</td>
+<td align="left">堆栈指针,指向栈顶</td>
+</tr>
+<tr>
+<td align="left">30</td>
+<td align="center">s8/fp</td>
+<td align="left">第九个寄存器变量./框架指针</td>
+</tr>
+<tr>
+<td align="left">31</td>
+<td align="center">ra</td>
+<td align="left">子函数的返回地址</td>
+</tr>
+</tbody></table>
+<ol>
+<li><p>两个特殊的寄存器</p>
+<ul>
+<li>$0:不管存放什么值,返回值永远是0</li>
+<li>$31:永远存放着正常函数调用指令(jal)的返回地址</li>
+</ul>
+</li>
+<li><p>$at:由编译器生成的复合指令使用</p>
+</li>
+<li><p>$v0, $v1: 用来存放你一个子程序(函数)的非浮点运算的结果或返回值.如果这两个寄存器不够存放需要返回的值,编译器会通过内存来完成</p>
+</li>
+<li><p>$a0-$a3:用来传递子函数调用的前四个非浮点参数</p>
+</li>
+<li><p>$t0-$t9:依照规定,一个子函数可以不用保存并随便的使用这些寄存器,在作表达式计算时,这些寄存器时非常好的暂时变量.当调用一个子函数时,这些寄存器中的值有可能被子函数破坏掉,所以也是最不安全的</p>
+</li>
+<li><p>$s0-$s8:依照规定,子函数必须保证当前函数返回时这些寄存器的内容必须恢复到函数调用以前的值,或者在子函数里不用这些寄存器或者把他们保存在堆栈上并在函数退出时恢复.这种约定使得这些寄存器非常适合作为寄存器变量,或存放一些在函数调用期间必须保存的原来的值(类比x86汇编中的函数序言和函数尾声)</p>
+</li>
+<li><p>$k0,k1:被OS的异常或中断处理程序使用.被使用后将不会恢复原来的值.因此它们很少在别的地方被使用</p>
+</li>
+<li><p>$gp:如果存在一个全局指针,它将指向运行时决定的静态数据(static data)区域的一个位置.这意味着利用gp作基址针,在gp指针32K左右的数据存储,系统只需要一条指令就可以完成.gp指针指向GOT表<br>如果没有全局指针,存取一个静态数据取余的值需要两条指令:一条是获取由编译器和loader决定好的32位地址常量,另外一条是对数据的真正存取.为了使用$gp,编译器在编译时刻必须知道一个数据是否在$gp的64K(上下32K)范围内,并不是所有的编译和运行系统都支持gp使用</p>
+</li>
+<li><p>$sp:堆栈指针的上下需要显式的通过指令来实现.因此MIPS通常只在子函数进入和退出的时候才调整堆栈的指针.这通过被调用的子函数来实现.SP通常被调整到这个被调用的子函数需要的堆栈的最低的地方,从而编译器可以通过相对于sp的偏移量来存取堆栈上的堆栈变量</p>
+</li>
+<li><p>$fp(另外约定名是s8):fp作为框架指针可以被函数用来记录堆栈的情况,在一个过程中变量相对于函数指针的偏移量是不变的.(相对地址)一些编程语言显示的支持这一点.汇编程序员经常会利用fp的这个用法.C语言的库函数alloca()就是利用率fp来动态调整堆栈的.</p>
+<ul>
+<li>如果堆栈的底部在编译时刻不能被决定,就不能通过$sp来存取堆栈变量,因此$fp被初始化位一个相对于该函数堆栈的一个常量的位置.这种用法对其他函数可以是不可兼得</li>
+</ul>
+</li>
+<li><p>$ra:当调用任何一个子函数时,返回地址存放在ra寄存器中,因此通常一个子程序的最后一个指令时jr ra,子函数如果还要调用其他的子函数,必须保存ra的值,通常通过堆栈</p>
+</li>
+<li><p>其他方面:MIPS里没有状态码,CPU状态寄存器或内部都不包含任何用户程序计算的结果状态信息</p>
+<ol>
+<li><strong>hi和lo</strong>是与乘法运算器相关的两个寄存器,用来存放结果,<strong>他们并不是通用寄存器</strong>,除了用在乘除法外,也不能有其他的用途,MIPS定义了一些指令可以往hi和lo里存入任何值</li>
+<li>浮点计算协处理器(浮点加速器,FPA),如果存在的话,有32个浮点寄存器,按汇编语言的简单约定是从$f0-$f31</li>
+<li>实际上对于MIPS i和MIPS II的机器室友16个偶数号的寄存器可以用来做数学计算,他们可以做单精度(32位)和双精度(64位),当做双精度运算时寄存器$f1存放$f0的余数.奇数号寄存器用来做寄存器和FPA之间的数据传送.MIPS III CPU 有32个FP寄存器,但是为了保持软件与过去的兼容性,最好不要用奇数号的寄存器</li>
+</ol>
+</li>
+</ol>
+<h3 id="整数乘法单元和寄存器"><a href="#整数乘法单元和寄存器" class="headerlink" title="整数乘法单元和寄存器"></a>整数乘法单元和寄存器</h3><p>MIPS体系结构认为乘法非常重要,应该用硬件实现乘法指令,这在RISC CPU中并不常见,乘法结果寄存器是互锁的:只有在整数乘法运算完成得到完整的结果后,才能读取结果寄存器.牺牲速度以换取执行简单和节省芯片空间.</p>
+<h3 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h3><p>只有加载或存储指令可以访问寄存器.存储器的寻址方式是<strong>基址-偏移地址</strong> 存储单元的地址是某个寄存器与指令中偏移量的和</p>
+<p><img src="%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F.png" alt="寻址方式"></p>
+<h3 id="存储器和寄存器中的数据类型"><a href="#存储器和寄存器中的数据类型" class="headerlink" title="存储器和寄存器中的数据类型"></a>存储器和寄存器中的数据类型</h3><p>MIPS CPU的一次操作可以读出或写入1~8个字节的数据,*MIPS编译器提供了64位指针,它把long解释成64位数据,总之long不应该小于int</p>
+<h2 id="MIPS指令与汇编"><a href="#MIPS指令与汇编" class="headerlink" title="MIPS指令与汇编"></a>MIPS指令与汇编</h2><h3 id="指令格式"><a href="#指令格式" class="headerlink" title="指令格式"></a>指令格式</h3><ul>
+<li><p>操作数</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>实例</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>32个寄存器</td>
+<td>$s0-$s7,$t0-$t7</td>
+<td>数据的快速定位,算数运算指令的操作数必须在寄存器中</td>
+</tr>
+<tr>
+<td>2^30个存储字</td>
+<td>存储器[1]-存储器[2^32]</td>
+<td>MIPS只能使用数据传送指令访问.MIPS中使用字寻址,相邻数据字的字地址相差4</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>在MIPS中字(四个字节)的地址必须是4的倍数,存储数据时可以避免一个数据分两次存取</p>
+</li>
+<li><p>MIPS有三种指令格式:<strong>所有指令都是32位长</strong></p>
+<ul>
+<li><p>R格式(Register format):所有其他<br><img src="R%E5%9E%8B%E6%8C%87%E4%BB%A4.png" alt="R格式"><br>例: <code>add $8, $17, $18</code>其中目标寄存器rd为$8,第一个源操作数rs为$17,第二个源操作数rt为$18<br>所有的opcode操作码都用0填充(第31-26位), shamt(偏移量)除了sll, srl, sra外都用0填充(第10到6位)</p>
+<blockquote>
+<p>add, addu, sub, subu, and, or, xor, nor, slt, sltu, sll, srl, sra, sllv, srlv, srav, jr</p>
+</blockquote>
+</li>
+<li><p>I格式(Immediate format):用于有立即数的指令(lw, sw, beq, bne)不包含位移 指令,immediate(address)操作数占16位(15-0)<br><img src="I%E5%9E%8B%E6%8C%87%E4%BB%A4.png" alt="I格式"><br>例:<code>lw $1, 10($2)</code> 这里$2为源操作数rs, 10为immediate(address)偏移量, $1为rt目标寄存器<br>数据装入: <code>Rt = Mem[Rs + Address]</code><br>数据存储: <code>Mem[Rs + Address] = Rt</code></p>
+<blockquote>
+<p>addi, addiu, andi, ori, xori, liu, lw, sw, beq, bne, slti, sltiu</p>
+</blockquote>
+</li>
+<li><p>J格式(Jump format) 无条件跳转j,并连接jal<br><img src="J%E5%9E%8B%E6%8C%87%E4%BB%A4.png" alt="J格式"></p>
+<blockquote>
+<p>j, jal</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F.png" alt="指令格式"></p>
+<h3 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h3><ol>
+<li><p><strong>寄存器寻址</strong>:MIPS算术运算指令的操作数必须从32个32位的寄存器中选取<br><code>add $t0, $s1, $s2</code><br><code>add $t1, $s3, $s4</code><br><code>sub $s0, $t0, $t1</code></p>
+</li>
+<li><p><strong>立即数寻址</strong>:以常数位操作数,无须访问存储器就可以使用常数.因为常数操作数频繁出现,所以在算术指令中加入常熟字段,比从存储器中读取常数快很多<br><code>addi $sp, $sp, 4</code></p>
+<ul>
+<li>将32位常数装入寄存器$s0<br>分两次装入,如0x612304<br><code>Lui $s0, 61</code>先放入高16位<br><code>addi $s0, $s0, 2304</code>再放入低16位</li>
+</ul>
+</li>
+<li><p>基址或偏移寻址:操作数在存储器中,且存储器地址是某寄存器与指令中某常量的和<br><code>Lw $t0, 8($s0)</code> #s0中装的是存储器中的地址,前面的8表示偏移量为8字节<br>使用偏移量的寻址,基本上使用最多的场景就是<strong>数组</strong>和<strong>栈</strong></p>
+</li>
+<li><p>PC相对寻址<br>条件分支指令:<code>bne $s0, $s1, Exit</code> # 如果$s0不等于$s1,则跳转到Exit</p>
+<ul>
+<li>PC(程序计数器)在8086体系中即cs:ip,存储当前执行指令的地址,指向下一句指令的地址,PC地址的变化 PC = PC + (下一条指令的长度)在MIPS中指令长度都为4字节,即PC = PC + 4</li>
+<li>为什么选PC寄存器<br>因为几乎所有的条件分支指令都是跳转到附近的地址</li>
+<li>如何处理16位无法表达的远距离分支<br>插入一个无条件跳转到分支目标地址的指令,把分支指令中的条件变反以决定是否跳过该指令</li>
+</ul>
+<blockquote>
+<p>bne, beq, j, jal</p>
+</blockquote>
+<p> <img src="PC%E7%9B%B8%E5%AF%B9%E5%AF%BB%E5%9D%80.png" alt="PC相对寻址"></p>
+</li>
+<li><p>伪直接寻址<br> 跳转地址 = PC中原高4位 +　指令中的26位 + 00 (32位地址)</p>
+</li>
+</ol>
+<h3 id="指令系统"><a href="#指令系统" class="headerlink" title="指令系统"></a>指令系统</h3><h4 id="数据传输类"><a href="#数据传输类" class="headerlink" title="数据传输类"></a>数据传输类</h4><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sw $3, 500($4)</td>
+<td>Store word</td>
+</tr>
+<tr>
+<td>sh $3, 502($2)</td>
+<td>Store half</td>
+</tr>
+<tr>
+<td>sb $2, 41($3)</td>
+<td>Store byte</td>
+</tr>
+<tr>
+<td>lw $1, 30($2)</td>
+<td>Load word</td>
+</tr>
+<tr>
+<td>lhq $1, 40($3)</td>
+<td>Load halfword</td>
+</tr>
+<tr>
+<td>lhu $1, 40($3)</td>
+<td>Load halfword unsigned</td>
+</tr>
+<tr>
+<td>lb $1, 40($3)</td>
+<td>Load byte</td>
+</tr>
+<tr>
+<td>lbu $1, 40($3)</td>
+<td>Load byte unsigned</td>
+</tr>
+<tr>
+<td>lui $1, 40</td>
+<td>Load Upper Immediate,将16位立即数放到寄存器高十六位,目标寄存器低16位填充0</td>
+</tr>
+</tbody></table>
+<p>访问内存只能用<strong>load</strong>或<strong>store</strong>指令<br><code>lw register_destination, RAM_source</code> 从内存中赋值RAM_source的内容到对应的寄存器中<br><code>sw register_source, RAM_destination</code> 将指定寄存器中的数据写入到指令的内存中<br><code>li register_destination, value</code> 将立即数写入目标内存中</p>
+<h4 id="算数逻辑指令"><a href="#算数逻辑指令" class="headerlink" title="算数逻辑指令"></a>算数逻辑指令</h4><p>每条指令有且仅有三个操作数,且只执行一个操作</p>
+<ul>
+<li>Add, Addu, Sub, subu, And, Or, Xor, Nor, SLT, SLTU</li>
+<li>Addi, AddiU, SLTI, SLTIU, AndI, OrI, XorI, LUI</li>
+<li>SLL, SRL, SRA, SLLV, SRLV, SRAV</li>
+</ul>
+<p><strong>算数指令</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>add $1, $2, $3</td>
+<td>$1 = $2 + $3</td>
+</tr>
+<tr>
+<td>sub $1, $2, $3</td>
+<td>$1 = $2 - $3</td>
+</tr>
+<tr>
+<td>addi $1, $2, 100</td>
+<td>$1 = $2 + 100</td>
+</tr>
+<tr>
+<td>addu $1, $2, $3</td>
+<td>$1 = $2 + $3</td>
+</tr>
+<tr>
+<td>subu $1, $2, $3</td>
+<td>$1 = $2 - $3</td>
+</tr>
+<tr>
+<td>addiu $1, $2, 100</td>
+<td>$1 = $2 + 100</td>
+</tr>
+<tr>
+<td>mult $2, $3</td>
+<td>Hi, Lo = $2 * $3 (用Hi,Lo存储64位的数据)</td>
+</tr>
+<tr>
+<td>multu $2, $3</td>
+<td>Hi, Lo = $2 * $3</td>
+</tr>
+<tr>
+<td>div $2, $3</td>
+<td>Lo = $2 / $3 </br> Hi = $2 mod $3</td>
+</tr>
+<tr>
+<td>divu $2, $3</td>
+<td>Lo = $2 / $3 </br> Hi = $2 mod $3</td>
+</tr>
+<tr>
+<td>mfhi $1</td>
+<td>$1 = Hi (move from Hi)</td>
+</tr>
+<tr>
+<td>mfLo $1</td>
+<td>$1 = LO (move from Lo)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>算数指令最多三个操作数,且操作数只能是寄存器,不允许出现地址</li>
+<li>对于$hi, $lo两个乘除法用到的寄存器,不存在直接寻址,必须要通过mfhi和mflo两个指令分别进行访问对应内容</li>
+</ul>
+<p>无符号整数一般都是用来表示存储器地址,溢出即使发生也大多数被忽略掉了,因此MIPS采用了两种不同的算数运算指令来分别处理</p>
+<ul>
+<li>addu, addiu, subu在发生溢出的时候不产生异常</li>
+<li>add, addi, sub在发生溢出时产生异常</li>
+</ul>
+<p>发生溢出的情况:<br>加法:两整数相加结果为负, 两负数相加结果为正<br>减法:正数减负数结果为负, 负数减正数结果为正<br>MIPS在检测到溢出发生时会产生一个异常, 造成溢出指令的地址被存到一个特定的寄存器中<br>乘法:multu Hi不为零,mult各位不等于Lo符号位<br>MIPS 乘除法指令都忽略了溢出的情况,程序必须自己判断得到的积或商是否超出了32位寄存器能表示的范围,还必须自己处理除零操作</p>
+<p><strong>逻辑指令</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>and $1, $2, $3</td>
+<td>$1 = $2 &amp; $3</td>
+</tr>
+<tr>
+<td>or $1, $2, $3</td>
+<td>$1 = $2 | $3</td>
+</tr>
+<tr>
+<td>xor $1, $2, $3</td>
+<td>$1 = $2 ^ $3</td>
+</tr>
+<tr>
+<td>nor $1, $2，$3</td>
+<td>$1 = ~($2 | $3)</td>
+</tr>
+<tr>
+<td>andi $1, $2, 10</td>
+<td>$1 = $2 &amp; 10</td>
+</tr>
+<tr>
+<td>ori $1, $2, 10</td>
+<td>$1 = $2 | 10</td>
+</tr>
+<tr>
+<td>xori $1, $2, 10</td>
+<td>$1 = ~$2 &amp; ~10</td>
+</tr>
+<tr>
+<td>sll $1, $2, 10</td>
+<td>$1 = $2 &lt;&lt; 10 (shift left by constant)</td>
+</tr>
+<tr>
+<td>srl $1, $2, 10</td>
+<td>$1 = $2 &gt;&gt; 10 (shift right by constant)</td>
+</tr>
+<tr>
+<td>sra $1, $2, 10</td>
+<td>$1 = $2 &gt;&gt; 10 (shift right sign extend)</td>
+</tr>
+<tr>
+<td>sllv $1, $2, $3</td>
+<td>$1 = $2 &lt;&lt; $3 (shift left by variable)</td>
+</tr>
+<tr>
+<td>srlv $1, $2, $3</td>
+<td>$1 = $2 &gt;&gt; $3 (shift right by variable)</td>
+</tr>
+<tr>
+<td>srav $1, $2, $3</td>
+<td>$1 = $2 &gt;&gt; $3 (shift right arith. by variable)(符号位保留)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>什么时候立即数被符号位扩展?<br>  算数指令总是将立即数做符号位扩展,即使指令是无符号的<br>  逻辑指令不对立即数做符号位扩展<br>  load/store指令地址计算时总是扩展立即数<br>  乘除指令任何情况下都不进行扩展</li>
+</ul>
+<h4 id="控制类指令"><a href="#控制类指令" class="headerlink" title="控制类指令"></a>控制类指令</h4><ul>
+<li>比较与分支<br>  <code>BEQ rs, rt, offset</code> if R[rs] == R[rt] then PC-relative branch<br>  <code>BNE rs, rt, offset</code>          &lt;&gt;</li>
+<li>与零比较并分支<br>  <code>BLEZ rs, offset</code>    if R[rs] == 0 then PC-relative branch<br>  <code>BGTZ rs, offset</code>             &gt;<br>  <code>BLTZ</code>                        &lt;<br>  <code>BGEZ</code>                        &gt;=<br>  <code>BLTZAL rs, offset</code>  if R[rs] &lt; 0 then branch and link (into R 31)<br>  <code>BGEZAL</code>                      &gt;= 0</li>
+</ul>
+<p>如果要实现其他比较功能,则需要两个以上指令<br>基本上都是与零比较(速度快)</p>
+<p><strong>跳转分支和比较指令</strong>:</p>
+<ul>
+<li>分支(if else系列)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>b target</td>
+<td>无条件跳转到target</td>
+</tr>
+<tr>
+<td>beq $1, $2, 100</td>
+<td>if($1 == $2) goto PC+4+100,这里用的是PC相对寻址</td>
+</tr>
+<tr>
+<td>bne $1, $2, 100</td>
+<td>if($1 != $2) goto PC+4+100</td>
+</tr>
+<tr>
+<td>blt $t0, $t1, target</td>
+<td>branch to target if $t0 = $t1</td>
+</tr>
+<tr>
+<td>ble $t0, $t1, target</td>
+<td>branch to target if $t0 &lt;= $t1</td>
+</tr>
+<tr>
+<td>bgt $t0, $t1, target</td>
+<td>branch to target if $t0 &gt; $t1</td>
+</tr>
+<tr>
+<td>bge $t0, $t1, target</td>
+<td>branch to target if $t0 &gt;= $t1</td>
+</tr>
+<tr>
+<td>slt $1, $2, $3</td>
+<td>if($2 &lt; $3) $1=1;else $1=0 (set on less than)</td>
+</tr>
+<tr>
+<td>slti $1, $2, 100</td>
+<td>if($2 &lt; 100) $1=1;else $1=0</td>
+</tr>
+<tr>
+<td>sltu $1, $2, $3</td>
+<td>if($2 &lt; $3) $1=1;else $1=0</td>
+</tr>
+<tr>
+<td>sltiu $1, $2, 100</td>
+<td>if($2 &lt; 100) $1=1;else $1=0</td>
+</tr>
+<tr>
+<td>j 10000</td>
+<td>go to 10000 (jump to target address)无条件跳转</td>
+</tr>
+<tr>
+<td>jr $31</td>
+<td>goto $31 (For switch procedure return)</td>
+</tr>
+<tr>
+<td>jal 10000</td>
+<td>$31 = PC + 4; goto 10000 (For procedure call程序调用)</td>
+</tr>
+</tbody></table>
+<p>jal 子程序调用, 将当前程序计数器保存到$ra中,在子程序里用<code>jr $ra</code>返回,如果调用的子程序有调用其他子程序,返回地址的标记就用栈来存储</p>
+<h3 id="MIPS计算机硬件对函数调用-过程-的支持"><a href="#MIPS计算机硬件对函数调用-过程-的支持" class="headerlink" title="MIPS计算机硬件对函数调用(过程)的支持"></a>MIPS计算机硬件对函数调用(过程)的支持</h3><ol>
+<li><p>为新的数据分配空间<br> 利用堆栈去存储函数调用的过程中不适合用寄存器保存的局部变量(如局部数据或结构)<br> <strong>过程框架</strong>:也叫活动记录,包含了函数调用(过程)保存的寄存器和局部变量的堆栈段<br> <img src="%E8%BF%87%E7%A8%8B.png" alt="过程"><br> 框架指针$fp指向框架的第一个字, 通常是保存调用的参数寄存器. 栈指针$sp指向栈顶,在程序执行的过程中栈指针可能改变. 因此通过固定的框架指针来访问变量要比用栈指针更简便. 如果一个过程的栈中没有局部变量,编译器将不设置和恢复框架指针,以节省时间(主要是通过$fp来访问局部变量).当需要框架指针时,以调用时的$sp作为框架指针的初值,调用返回时根据$fp恢复$sp值</p>
+</li>
+<li><p>MIPS程序和数据的存储器空间使用约定<br> <img src="64%E7%A9%BA%E9%97%B4.png" alt="64位"><br> 从顶端开始对栈指针初始化位7fffffff,并向下向数据段增长;在底端,程序代码(文本)开始于00400000;静态数据开始于10000000;紧接着是由C中malloc进行存储器分配的动态资源,朝堆栈段向上增长<br> 全局指针被设定为易于访问数据的地址,以便使用相对于$gp的±16位偏移量0x10000000-0x1000ffff<br> 在32位MIPS体系结构下,最多可寻址4GB地址空间,分配如下<br> <img src="32%E7%A9%BA%E9%97%B4.png" alt="32位"><br> MIPS体系结构下，程序计数器（PC）不是一个寄存 器，在一个具有流水线的CPU中，程序计数器的值在一 个给定的时刻有多个可选值，但可见的只有一个。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mips/" rel="tag"># mips</a>
+              <a href="/tags/%E6%B1%87%E7%BC%96/" rel="tag"># 汇编</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/06/simple-8086re/" rel="prev" title="simple_8086re">
+      <i class="fa fa-chevron-left"></i> simple_8086re
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/08/Xman-babymips/" rel="next" title="Xman-babymips">
+      Xman-babymips <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE3MS8yOTY0Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MIPS%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">MIPS体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">寄存器特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95%E5%8D%95%E5%85%83%E5%92%8C%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">整数乘法单元和寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">寻址方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E5%92%8C%E5%AF%84%E5%AD%98%E5%99%A8%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.4.</span> <span class="nav-text">存储器和寄存器中的数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIPS%E6%8C%87%E4%BB%A4%E4%B8%8E%E6%B1%87%E7%BC%96"><span class="nav-number">2.</span> <span class="nav-text">MIPS指令与汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">指令格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BB%E5%9D%80"><span class="nav-number">2.2.</span> <span class="nav-text">寻址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.3.</span> <span class="nav-text">指令系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%B1%BB"><span class="nav-number">2.3.1.</span> <span class="nav-text">数据传输类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E9%80%BB%E8%BE%91%E6%8C%87%E4%BB%A4"><span class="nav-number">2.3.2.</span> <span class="nav-text">算数逻辑指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E7%B1%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">2.3.3.</span> <span class="nav-text">控制类指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MIPS%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E5%AF%B9%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8-%E8%BF%87%E7%A8%8B-%E7%9A%84%E6%94%AF%E6%8C%81"><span class="nav-number">2.4.</span> <span class="nav-text">MIPS计算机硬件对函数调用(过程)的支持</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="STEVE"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">STEVE</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Mon Apr 05 2021 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">STEVE</span>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

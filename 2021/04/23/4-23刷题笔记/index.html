@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="刮开有奖定位关键函数(已更改) 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657INT_PTR __stdcall DialogFunc(HWND hDlg, UINT a2, WPARAM a3, LPARAM a4)&amp;#123;  c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4.23刷题笔记">
+<meta property="og:url" content="http://example.com/2021/04/23/4-23%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="STERIA LAB">
+<meta property="og:description" content="刮开有奖定位关键函数(已更改) 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657INT_PTR __stdcall DialogFunc(HWND hDlg, UINT a2, WPARAM a3, LPARAM a4)&amp;#123;  c">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-23T07:05:13.000Z">
+<meta property="article:modified_time" content="2021-04-23T07:58:16.000Z">
+<meta property="article:author" content="STEVE">
+<meta property="article:tag" content="reverse">
+<meta property="article:tag" content="buuctf">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/04/23/4-23%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>4.23刷题笔记 | STERIA LAB</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">STERIA LAB</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">for STEVE</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/23/4-23%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="STEVE">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STERIA LAB">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          4.23刷题笔记
+        </h1>
+
+        <div class="post-meta">
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-23 15:05:13 / 修改时间：15:58:16" itemprop="dateCreated datePublished" datetime="2021-04-23T15:05:13+08:00">2021-04-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/" itemprop="url" rel="index"><span itemprop="name">writeups</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/reverse/" itemprop="url" rel="index"><span itemprop="name">reverse</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="刮开有奖"><a href="#刮开有奖" class="headerlink" title="刮开有奖"></a>刮开有奖</h2><p>定位关键函数(已更改)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">INT_PTR __stdcall <span class="title">DialogFunc</span><span class="params">(HWND hDlg, UINT a2, WPARAM a3, LPARAM a4)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *v4; <span class="comment">// esi</span></span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *v5; <span class="comment">// edi</span></span><br><span class="line">  <span class="keyword">int</span> chara[<span class="number">11</span>]; <span class="comment">// [esp+8h] [ebp-20030h] BYREF</span></span><br><span class="line">  CHAR String[<span class="number">65536</span>]; <span class="comment">// [esp+34h] [ebp-20004h] BYREF</span></span><br><span class="line">  <span class="keyword">char</span> v9[<span class="number">65536</span>]; <span class="comment">// [esp+10034h] [ebp-10004h] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( a2 == <span class="number">272</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> ( a2 != <span class="number">273</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span> ( a3 == <span class="number">1001</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">memset</span>(String, <span class="number">0</span>, <span class="number">0xFFFF</span>u);</span><br><span class="line">    GetDlgItemTextA(hDlg, <span class="number">1000</span>, String, <span class="number">0xFFFF</span>);</span><br><span class="line">    <span class="keyword">if</span> ( <span class="built_in">strlen</span>(String) == <span class="number">8</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      chara[<span class="number">0</span>] = <span class="string">&#x27;Z&#x27;</span>;</span><br><span class="line">      chara[<span class="number">1</span>] = <span class="string">&#x27;J&#x27;</span>;</span><br><span class="line">      chara[<span class="number">2</span>] = <span class="string">&#x27;S&#x27;</span>;</span><br><span class="line">      chara[<span class="number">3</span>] = <span class="string">&#x27;E&#x27;</span>;</span><br><span class="line">      chara[<span class="number">4</span>] = <span class="string">&#x27;C&#x27;</span>;</span><br><span class="line">      chara[<span class="number">5</span>] = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">      chara[<span class="number">6</span>] = <span class="string">&#x27;N&#x27;</span>;</span><br><span class="line">      chara[<span class="number">7</span>] = <span class="string">&#x27;H&#x27;</span>;</span><br><span class="line">      chara[<span class="number">8</span>] = <span class="string">&#x27;3&#x27;</span>;</span><br><span class="line">      chara[<span class="number">9</span>] = <span class="string">&#x27;n&#x27;</span>;</span><br><span class="line">      chara[<span class="number">10</span>] = <span class="string">&#x27;g&#x27;</span>;</span><br><span class="line">      encry(chara, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">      <span class="built_in">memset</span>(v9, <span class="number">0</span>, <span class="number">0xFFFF</span>u);</span><br><span class="line">      v9[<span class="number">0</span>] = String[<span class="number">5</span>];</span><br><span class="line">      v9[<span class="number">2</span>] = String[<span class="number">7</span>];</span><br><span class="line">      v9[<span class="number">1</span>] = String[<span class="number">6</span>];</span><br><span class="line">      v4 = sub_401000(v9, <span class="built_in">strlen</span>(v9));</span><br><span class="line">      <span class="built_in">memset</span>(v9, <span class="number">0</span>, <span class="number">0xFFFF</span>u);</span><br><span class="line">      v9[<span class="number">1</span>] = String[<span class="number">3</span>];</span><br><span class="line">      v9[<span class="number">0</span>] = String[<span class="number">2</span>];</span><br><span class="line">      v9[<span class="number">2</span>] = String[<span class="number">4</span>];</span><br><span class="line">      v5 = sub_401000(v9, <span class="built_in">strlen</span>(v9));</span><br><span class="line">      <span class="keyword">if</span> ( String[<span class="number">0</span>] == chara[<span class="number">0</span>] + <span class="number">34</span></span><br><span class="line">        &amp;&amp; String[<span class="number">1</span>] == chara[<span class="number">4</span>]</span><br><span class="line">        &amp;&amp; <span class="number">4</span> * String[<span class="number">2</span>] - <span class="number">141</span> == <span class="number">3</span> * chara[<span class="number">2</span>]</span><br><span class="line">        &amp;&amp; String[<span class="number">3</span>] / <span class="number">4</span> == <span class="number">2</span> * (chara[<span class="number">7</span>] / <span class="number">9</span>)</span><br><span class="line">        &amp;&amp; !<span class="built_in">strcmp</span>(v4, <span class="string">&quot;ak1w&quot;</span>)</span><br><span class="line">        &amp;&amp; !<span class="built_in">strcmp</span>(v5, <span class="string">&quot;V1Ax&quot;</span>) )</span><br><span class="line">      &#123;</span><br><span class="line">        MessageBoxA(hDlg, <span class="string">&quot;U g3t 1T!&quot;</span>, <span class="string">&quot;@_@&quot;</span>, <span class="number">0</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( a3 != <span class="number">1</span> &amp;&amp; a3 != <span class="number">2</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  EndDialog(hDlg, a3);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到chara里放了一串字符串,然后通过encry函数变换,最后在if语句中与另外两个字符串做比较<br>根据string可以看出flag有八个字符</p>
+<p>跟入encry函数，可以看出这里是一个递归的冒泡排序，<code>encry(character, begin, i - 1)</code>这里有一个递归调用,插入排序,中间其他的if语句都是判断越界的语句</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">encry</span><span class="params">(<span class="keyword">int</span> character, <span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// esi</span></span><br><span class="line">  <span class="keyword">int</span> j; <span class="comment">// ecx</span></span><br><span class="line">  <span class="keyword">int</span> CHAR; <span class="comment">// edx</span></span><br><span class="line"></span><br><span class="line">  result = end;</span><br><span class="line">  <span class="keyword">for</span> ( i = begin; i &lt;= end; begin = i )</span><br><span class="line">  &#123;</span><br><span class="line">    j = <span class="number">4</span> * i;                                  <span class="comment">// 整型的大小为4字节</span></span><br><span class="line">    CHAR = *(<span class="number">4</span> * i + character);</span><br><span class="line">    <span class="keyword">if</span> ( begin &lt; result &amp;&amp; i &lt; result )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">do</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">if</span> ( CHAR &gt; *(character + <span class="number">4</span> * result) )</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          ++i;</span><br><span class="line">          *(j + character) = *(character + <span class="number">4</span> * result);</span><br><span class="line">          <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">while</span> ( *(character + <span class="number">4</span> * i) &lt;= CHAR )</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="keyword">if</span> ( ++i &gt;= result )</span><br><span class="line">              <span class="keyword">goto</span> LABEL_13;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          j = <span class="number">4</span> * i;</span><br><span class="line">          *(character + <span class="number">4</span> * result) = *(<span class="number">4</span> * i + character);</span><br><span class="line">        &#125;</span><br><span class="line">        --result;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span> ( i &lt; result );</span><br><span class="line">    &#125;</span><br><span class="line">LABEL_13:</span><br><span class="line">    *(character + <span class="number">4</span> * result) = CHAR;</span><br><span class="line">    encry(character, begin, i - <span class="number">1</span>);</span><br><span class="line">    result = end;</span><br><span class="line">    ++i;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/reverse/" rel="tag"># reverse</a>
+              <a href="/tags/buuctf/" rel="tag"># buuctf</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/22/ppsuc%E6%A0%A1%E5%86%85%E8%B5%9Bwp/" rel="prev" title="ppsuc校内赛wp">
+      <i class="fa fa-chevron-left"></i> ppsuc校内赛wp
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/10/Google%E8%AF%AD%E6%B3%95/" rel="next" title="Google语法">
+      Google语法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE3MS8yOTY0Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%AE%E5%BC%80%E6%9C%89%E5%A5%96"><span class="nav-number">1.</span> <span class="nav-text">刮开有奖</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="STEVE"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">STEVE</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Mon Apr 05 2021 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">STEVE</span>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

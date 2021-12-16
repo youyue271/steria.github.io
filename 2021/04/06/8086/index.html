@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="介绍基础知识 以80X86系列微处理器为例,8086的字长为16位  80386寄存器位数为32位">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8086">
+<meta property="og:url" content="http://example.com/2021/04/06/8086/index.html">
+<meta property="og:site_name" content="STERIA LAB">
+<meta property="og:description" content="介绍基础知识 以80X86系列微处理器为例,8086的字长为16位  80386寄存器位数为32位">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/04/06/8086/%E5%AF%84%E5%AD%98%E5%99%A8.png">
+<meta property="og:image" content="http://example.com/2021/04/06/8086/%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8.png">
+<meta property="og:image" content="http://example.com/2021/04/06/8086/%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BC%A9%E5%86%99%E5%BD%A2%E5%BC%8F.png">
+<meta property="og:image" content="http://example.com/2021/04/06/8086/%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80.png">
+<meta property="og:image" content="http://example.com/2021/04/06/8086/%E5%8F%AF%E6%89%A7%E8%A1%8C.png">
+<meta property="article:published_time" content="2021-04-06T08:21:53.000Z">
+<meta property="article:modified_time" content="2021-04-11T00:33:52.000Z">
+<meta property="article:author" content="STEVE">
+<meta property="article:tag" content="8086">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/04/06/8086/%E5%AF%84%E5%AD%98%E5%99%A8.png">
+
+<link rel="canonical" href="http://example.com/2021/04/06/8086/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>8086 | STERIA LAB</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">STERIA LAB</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">for STEVE</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/06/8086/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="STEVE">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STERIA LAB">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          8086
+        </h1>
+
+        <div class="post-meta">
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-06 16:21:53" itemprop="dateCreated datePublished" datetime="2021-04-06T16:21:53+08:00">2021-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-11 08:33:52" itemprop="dateModified" datetime="2021-04-11T08:33:52+08:00">2021-04-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">汇编语言</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><ul>
+<li><p>以80X86系列微处理器为例,8086的字长为16位</p>
+</li>
+<li><p>80386寄存器位数为32位</p>
+<span id="more"></span>
+<p>采用字节,字,双字来表示主句</p>
+</li>
+<li><p>字节(Byte):8位二进制数</p>
+</li>
+<li><p>字(Word):16位二进制数,等于两字节</p>
+</li>
+<li><p>双字(Double Word):32位二进制数等于4字节</p>
+</li>
+</ul>
+<h3 id="8086寄存器组"><a href="#8086寄存器组" class="headerlink" title="8086寄存器组"></a>8086寄存器组</h3><ul>
+<li>根据用途可以分为4种类型:数据寄存器,地址寄存器,段寄存器和控制寄存器.</li>
+</ul>
+<p><img src="%E5%AF%84%E5%AD%98%E5%99%A8.png" alt="寄存器"></p>
+<ol>
+<li><p>数据寄存器<br>数据寄存器中每个寄存器可以分为2个8位寄存器:AH、AL，BH、BL，CH、CL，DH、DL</p>
+</li>
+<li><p>地址寄存器<br>包括指针和变址寄存器SP、BP、SI、DI四个16位寄存器，可以用来存放操作数的偏移地址，也可以作为通用寄存器用。</p>
+</li>
+<li><p>段寄存器<br>8086CPU有4个16位段寄存器，CS代码段寄存器、DS数据段寄存器、ES附加段寄存器、SS堆栈段寄存器</p>
+</li>
+<li><p>控制寄存器<br>包括IP和FLAGS（又称PSW程序状态字）两个16位寄存器，用于控制程序的执行</p>
+<ol>
+<li>IP指令指针寄存器，用来存放代码段中的偏移地址，指出当前正在执行的下一条指令所在单元的偏移地址</li>
+<li>FALGS标志寄存器中的某位代表CPU的1一个标志，表示出CPU的某种执行状态，最低位为D0，最高位为D15，8086CPU中的标志寄存器共有9个标志<br><img src="%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8.png" alt="标志寄存器"></li>
+<li>条件码标志<ol>
+<li>CF进位标志,当指令执行结果的最高位向前有进位时,CF=1,否则CF=0</li>
+<li>SF符号标志,当指令执行结果的最高位(符号位)为负时,SF=1,否则SF=0</li>
+<li>ZF零标志.当指令执行结果为0时,ZF=1,结果不为0时ZF=0</li>
+<li>OF溢出标志,当指令执行结果有溢出时,OF=1,否则OF=0</li>
+<li>AF辅助进位标志,当指令执行结果的第三位(半字节)向前有进位时,AF=1,否则AF=0</li>
+<li>PF奇偶标志,当指令执行结果中的1个数为偶数个时,PF=1,否则PF=0</li>
+</ol>
+</li>
+<li>控制标志<ol>
+<li>DF方向标志.执行串处理指令时,若设置DF=0,存储的那元的地址段寄存器的值自动增加,若设置DF=1,存储单元的地址寄存器的值自动减小</li>
+<li>IF中断标志,试着IF=1,允许CPU响应可屏蔽中断,IF=0则不响应</li>
+<li>TF陷阱标志,在DEBUG调试时,TF=1,采用单不执行的方式,即进入陷阱,TF=0正常执行程序</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>在DEBUG调试环境下椅子木缩写形式表示各个标志位的装填进入DEBUG后可用R命令查看寄存器状态,可以看到除了陷阱标志以外的标志位状态<br><img src="%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BC%A9%E5%86%99%E5%BD%A2%E5%BC%8F.png" alt="标志位缩写形式"></li>
+</ul>
+<h3 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h3><ol>
+<li><p>物理地址<br>物理地址是内存单元的真实地址，存储单元的物理地址是唯一的<br>Intel 8086 CPU 有20根地址线，因此其存储空间可达2的20次方 = 1M个字节单位，地址线的存储空间中采用十六进制表示的物理地址范围是 00000H ~ FFFFFH</p>
+</li>
+<li><p>逻辑地址<br>逻辑地址是用户编程时使用的地址，分为段地址和偏移地址<br>8086汇编语言中，把内存地址空间分为若干逻辑段，每段由一些存储单元构成，每段最大位65536个字节单位，用段地址指出时哪一段，偏移地址标明时该段中的哪个单元</p>
+<ul>
+<li>逻辑地址的形式：段地址：偏移地址<br><img src="%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80.png" alt="逻辑地址"></li>
+</ul>
+</li>
+<li><p>逻辑地址转换为物理地址<br>用户编程采用的逻辑地址,在CPU执行程序时都要转换成实际的物理地址,这个转换过程是由CPU中的地址加法器自动完成的<br>转换时先将16位的段地址左移4位,相当于乘以16或十六进制的10H,再和偏移地址相加<br><code>物理地址 = 段地址 * 10H + 偏移地址</code><br>存储器逻辑分段类型:</p>
+<ul>
+<li>代码段:用于存放指令,段地址存放再段寄存器CS</li>
+<li>数据段:用于存放数据,段地址存放再段寄存器DS</li>
+<li>附加段:用于辅助存放数据,段地址存放在段寄存器ES</li>
+<li>堆栈段:重要的数据结构,可以用来保存数据、地址和系统参数,段地址存放再段寄存器SS<br>一个实际的存储单元只能存放一个字节(8位二进制)的数据,高字节放在高地址单元,低字节放在低地址单元</li>
+</ul>
+</li>
+</ol>
+<h2 id="指令系统和寻址方式"><a href="#指令系统和寻址方式" class="headerlink" title="指令系统和寻址方式"></a>指令系统和寻址方式</h2><h3 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h3><ul>
+<li><p>汇编指令由<strong>操作码字段</strong>和<strong>操作数字段</strong>构成,第一个操作数成为目的操作数,表示操作后的结果;第二个操作数称为源操作数,表示来源操作数,两者以逗号分隔</p>
+ <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">MOV</span> <span class="built_in">AX</span>,<span class="built_in">BX</span></span><br></pre></td></tr></table></figure></li>
+<li><p>寻址方式:指令中提供操作数或操作数地址,分为三类</p>
+<ol>
+<li>立即寻址方式</li>
+<li>寄存器寻址方式</li>
+<li>存储器寻址方式</li>
+</ol>
+</li>
+<li><p>常用寻址方式</p>
+<ul>
+<li>立即寻址方式</li>
+<li>寄存器寻址方式</li>
+<li>直接寻址方式</li>
+<li>寄存器间接寻址方式</li>
+<li>寄存器相对寻址方式</li>
+<li>基址变址寻址方式</li>
+<li>相对基址变址寻址方式</li>
+</ul>
+</li>
+<li><p>选择寻址方式的原则</p>
+<ul>
+<li>实用</li>
+<li>有效</li>
+</ul>
+</li>
+</ul>
+<h3 id="立即寻址方式"><a href="#立即寻址方式" class="headerlink" title="立即寻址方式"></a>立即寻址方式</h3><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">MOV</span> <span class="built_in">AX</span>, <span class="number">3060H</span></span><br><span class="line"><span class="keyword">MOV</span> <span class="built_in">AL</span>, <span class="number">5</span></span><br><span class="line"><span class="keyword">MOV</span> <span class="built_in">BL</span>, <span class="number">0FFH</span></span><br><span class="line"><span class="keyword">MOV</span> <span class="built_in">BX</span>, <span class="number">0A46DH</span></span><br><span class="line"><span class="keyword">MOV</span> <span class="built_in">CX</span>, <span class="number">23</span></span><br></pre></td></tr></table></figure>
+
+<p>立即数:所要找的操作数直接卸载指令中<br>8086,80286中立即数是8位或16位的80386以上可以是32位的立即数</p>
+<h3 id="寄存器寻址方式"><a href="#寄存器寻址方式" class="headerlink" title="寄存器寻址方式"></a>寄存器寻址方式</h3><p>操作数在寄存器中,在指令中指定寄存器名</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">MOV</span> <span class="built_in">AX</span>, <span class="built_in">BX</span></span><br><span class="line"><span class="keyword">MOV</span> <span class="built_in">CL</span>, <span class="number">AH</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="直接寻址方式"><a href="#直接寻址方式" class="headerlink" title="直接寻址方式"></a>直接寻址方式</h3><p>操作数在内存中,操作数的偏移地址,也称有效地址EA直接写在指令中</p>
+<ol>
+<li>存储器读操作<br>MOV指令可以实现CPU对存储器的读写,若传送指令的目的操作数是CPU的寄存器,源操作数是存储单元,就完成了对存储器的读操作<br><code>MOV AX,DS:[2000H]</code>表示从数据段的2000H单元读出一个字送入AX</li>
+<li>存储器写操作<br>把MOV指令的目的操作数变为存储单元,源操作数位CPU的寄存器即可<br><code>MOV DS:[4000H],AX</code>将AX的值写入数据段的4000H单元</li>
+</ol>
+<h3 id="寄存器间接寻址方式"><a href="#寄存器间接寻址方式" class="headerlink" title="寄存器间接寻址方式"></a>寄存器间接寻址方式</h3><p>操作数放在内存中</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">MOV</span> <span class="built_in">AX</span>, [<span class="built_in">BX</span>]</span><br></pre></td></tr></table></figure>
+
+<p>操作数EA在基地址寄存器BX,BP或变址寄存器SI,DI中,而操作数的段地址在数据段DS或堆栈段SS中<br>如果有效地址由BX,SI,DI指出,则默认为对应于数据段,而用BP指出则对应于堆栈段</p>
+<h3 id="寄存器相对寻址方式"><a href="#寄存器相对寻址方式" class="headerlink" title="寄存器相对寻址方式"></a>寄存器相对寻址方式</h3><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">MOV</span> <span class="built_in">AX</span>,[<span class="built_in">BX</span>+<span class="number">1200H</span>]</span><br></pre></td></tr></table></figure>
+
+<p>操作数EA是一个基址或变址寄存器的内容再加上8位或16位位移量之和,这个位移量(相对量)可以是立即数也可以是符号地址</p>
+<h3 id="基址变址寻址方式"><a href="#基址变址寻址方式" class="headerlink" title="基址变址寻址方式"></a>基址变址寻址方式</h3><p><code>MOV AX, [BX+SI]</code></p>
+<h3 id="相对基址变址寻址方式"><a href="#相对基址变址寻址方式" class="headerlink" title="相对基址变址寻址方式"></a>相对基址变址寻址方式</h3><p><code>MOV AX,[BX+SI+1200H]</code></p>
+<h2 id="汇编语言程序设计"><a href="#汇编语言程序设计" class="headerlink" title="汇编语言程序设计"></a>汇编语言程序设计</h2><h3 id="从源程序到可执行程序"><a href="#从源程序到可执行程序" class="headerlink" title="从源程序到可执行程序"></a>从源程序到可执行程序</h3><p>用户编写的源程序要经过汇编程序MASM汇编(翻译)后生成二进制目标程序,文件名默认与源程序同名,扩展名为.obj,再经过link连接生成可执行程序,文件名默认于源程序同名,扩展名为.exe</p>
+<p><img src="%E5%8F%AF%E6%89%A7%E8%A1%8C.png" alt="可执行"></p>
+<h3 id="屏幕显示和键盘输入"><a href="#屏幕显示和键盘输入" class="headerlink" title="屏幕显示和键盘输入"></a>屏幕显示和键盘输入</h3><p>汇编语言中,凡是涉及到键盘输入,屏幕显示等输入输出操作,都可以用软件中断指令INT n的功能调用来实现,所谓功能调用时计算机系统设计的简单I/O子程序,能方便地访问系统地硬件资源</p>
+<p>再微机系统中,功能调用分两个人层次,最底层地时BIOS功能调用,其次是DOS功能调用了,他们都是通过软件中断指令<code>INT n</code>来进行调用的,除了用INT指令实现输入和显示之外,还可以通过直接写显示缓冲区的方式显示字符</p>
+<ol>
+<li>DOS功能调用<br>DOS的功能调用采用<code>INT 21</code>指令,调用时要求再AH中提供功能号,再指定的寄存器和存储单元中提供第哦啊用必须的参数和缓冲区地址,执行后系统在AL中放入返回参数<br>常用的ODS功能调用有5个<ol>
+<li>1号DOS功能调用:键盘输入1个字符</li>
+<li>2号DOs功能调用:显示器输出1个字符</li>
+<li>9号DOS功能调用:显示字符串</li>
+<li>10号DOS功能调用:键盘输入缓冲区</li>
+<li>4CH号DOS功能调用:返回DOS控制</li>
+</ol>
+<ul>
+<li>I/O处理操作的都是ASCII码,对于键盘输入的数字,做计算时需要将ASCII码转变为二进制数,输出显示数据时需要将二进制数转为ASCII码</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/8086/" rel="tag"># 8086</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/06/python-turtle/" rel="prev" title="python_turtle">
+      <i class="fa fa-chevron-left"></i> python_turtle
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/06/linux%E7%AE%80%E5%8D%95%E6%8C%87%E4%BB%A4/" rel="next" title="linux简单指令">
+      linux简单指令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE3MS8yOTY0Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.1.</span> <span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8086%E5%AF%84%E5%AD%98%E5%99%A8%E7%BB%84"><span class="nav-number">1.2.</span> <span class="nav-text">8086寄存器组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98"><span class="nav-number">1.3.</span> <span class="nav-text">内存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">指令系统和寻址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">寻址方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%8B%E5%8D%B3%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">立即寻址方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">寄存器寻址方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">2.4.</span> <span class="nav-text">直接寻址方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E9%97%B4%E6%8E%A5%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">2.5.</span> <span class="nav-text">寄存器间接寻址方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E7%9B%B8%E5%AF%B9%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">2.6.</span> <span class="nav-text">寄存器相对寻址方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E5%9D%80%E5%8F%98%E5%9D%80%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">2.7.</span> <span class="nav-text">基址变址寻址方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%AF%B9%E5%9F%BA%E5%9D%80%E5%8F%98%E5%9D%80%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">2.8.</span> <span class="nav-text">相对基址变址寻址方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text">汇编语言程序设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E6%BA%90%E7%A8%8B%E5%BA%8F%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.1.</span> <span class="nav-text">从源程序到可执行程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%8F%E5%B9%95%E6%98%BE%E7%A4%BA%E5%92%8C%E9%94%AE%E7%9B%98%E8%BE%93%E5%85%A5"><span class="nav-number">3.2.</span> <span class="nav-text">屏幕显示和键盘输入</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="STEVE"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">STEVE</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Mon Apr 05 2021 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">STEVE</span>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

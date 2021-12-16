@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="x86函数调用约定 int function(int a, int b)   在参数传递中需要说明: 当参数个数多余一个的时候,按照什么顺序把参数压入堆栈 函数调用后,由谁来把堆栈恢复原装   在高级语言中,通过函数调用约定来说明这两个问题,常见的调用约定 stdcall cdecl fastcall thiscall naked call    stdcall调用约定 stdcall很多时候被称">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单结构的汇编">
+<meta property="og:url" content="http://example.com/2021/06/18/%E7%AE%80%E5%8D%95%E7%BB%93%E6%9E%84%E7%9A%84%E6%B1%87%E7%BC%96/index.html">
+<meta property="og:site_name" content="STERIA LAB">
+<meta property="og:description" content="x86函数调用约定 int function(int a, int b)   在参数传递中需要说明: 当参数个数多余一个的时候,按照什么顺序把参数压入堆栈 函数调用后,由谁来把堆栈恢复原装   在高级语言中,通过函数调用约定来说明这两个问题,常见的调用约定 stdcall cdecl fastcall thiscall naked call    stdcall调用约定 stdcall很多时候被称">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-18T14:33:44.000Z">
+<meta property="article:modified_time" content="2021-07-11T17:19:40.000Z">
+<meta property="article:author" content="STEVE">
+<meta property="article:tag" content="8086">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/06/18/%E7%AE%80%E5%8D%95%E7%BB%93%E6%9E%84%E7%9A%84%E6%B1%87%E7%BC%96/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>简单结构的汇编 | STERIA LAB</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">STERIA LAB</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">for STEVE</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/18/%E7%AE%80%E5%8D%95%E7%BB%93%E6%9E%84%E7%9A%84%E6%B1%87%E7%BC%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="STEVE">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="STERIA LAB">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          简单结构的汇编
+        </h1>
+
+        <div class="post-meta">
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-18 22:33:44" itemprop="dateCreated datePublished" datetime="2021-06-18T22:33:44+08:00">2021-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-12 01:19:40" itemprop="dateModified" datetime="2021-07-12T01:19:40+08:00">2021-07-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">汇编语言</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="x86函数调用约定"><a href="#x86函数调用约定" class="headerlink" title="x86函数调用约定"></a>x86函数调用约定</h2><blockquote>
+<p><code>int function(int a, int b)</code></p>
+</blockquote>
+<ul>
+<li>在参数传递中需要说明:<ul>
+<li>当参数个数多余一个的时候,按照什么顺序把参数压入堆栈</li>
+<li>函数调用后,由谁来把堆栈恢复原装</li>
+</ul>
+</li>
+<li>在高级语言中,通过函数调用约定来说明这两个问题,常见的调用约定<ul>
+<li>stdcall</li>
+<li>cdecl</li>
+<li>fastcall</li>
+<li>thiscall</li>
+<li>naked call</li>
+</ul>
+</li>
+</ul>
+<h3 id="stdcall调用约定"><a href="#stdcall调用约定" class="headerlink" title="stdcall调用约定"></a>stdcall调用约定</h3><ul>
+<li><p>stdcall很多时候被称为pascal调用约定,因为pascal使用的函数的调用约定就是stdcall,在Microsoft C++系列的C/C++编译器中,常常用PASCAL宏来声明这个调用约定,类似的宏还有WINAPI和CALLBACK</p>
+</li>
+<li><p>stdcal调用声明约定的语法为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __stdcall <span class="title">function</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>stdcall调用约定意味着:</p>
+<ol>
+<li>调用函数时参数从右向左压入堆栈</li>
+<li>被调用函数自身修改堆栈</li>
+<li>被调用函数函数名自动加前导的下划线,后面紧跟一个@符号,其后紧跟参数的尺寸</li>
+</ol>
+</li>
+<li><p>转换成汇编(eg 调用<code>function(a, b)</code>)</p>
+<ul>
+<li><p>调用函数:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">push b  //从右向左入栈,所以先压入b</span><br><span class="line">push a</span><br><span class="line">call function</span><br></pre></td></tr></table></figure></li>
+<li><p>被调用函数:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">push ebp   //保存ebp,注意栈向低地址生长</span><br><span class="line">mov ebp, esp   //调用函数的esp,即被调用函数的ebp</span><br><span class="line">mov eax, [ebp+8H]   //此时的栈从ebp(esp)开始依次是,调用函数的ebp,调用函数的返回地址,参数a,参数b(地址从小到大), 此时[ebp+8H],指向参数a,用eax做返回值</span><br><span class="line">add eax, [ebp+0CH]  //[ebp+0CH]指向参数b,加给eax,实现了a+b</span><br><span class="line">mov esp, ebp  //返回的时候,由函数自己修改堆栈,这里是还原调用函数的esp(这里是被调用函数的栈底)</span><br><span class="line">pop ebp		//还原调用函数的栈底</span><br><span class="line">ret 8  //清理堆栈,然后pop eip</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>这里function的函数名编译的时候被翻译成_function@8  (这里一个参数为dword, 两个参数占8个字节)</p>
+</li>
+<li><p>注意取参数的时候是用相对于ebp的偏移来存取的</p>
+</li>
+<li><p>最后<code>ret 8</code>表示清理8个字节的堆栈(清理被调用函数的参数),函数自己恢复了堆栈</p>
+</li>
+</ul>
+<h3 id="cdecl调用约定"><a href="#cdecl调用约定" class="headerlink" title="cdecl调用约定"></a>cdecl调用约定</h3><ul>
+<li><p>cdecl调用约定又称为C调用约定,是C语言缺省的调用约定,定于语法为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">function</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>明确定义:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">function</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>cdecl调用约定:</p>
+<ol>
+<li>调用函数时参数从右向左压入堆栈</li>
+<li>被调用函数本身不清理堆栈,由调用函数清理</li>
+<li>编译的时候在函数名前加前导的下划线<ul>
+<li>注意由于是用调用函数清理堆栈,所以被调用函数本身的参数个数可以不固定</li>
+<li>因为参数从右向左压入栈中,所以第一个参数肯定是最靠近栈顶的,因此当采用不定个数参数的时候,第一个参数在栈中的位置肯定可以知道,只要不定参数的个数,能够由第一个参数或者后续明确的参数确定,就可以采用不定参数</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>转换成汇编</p>
+<ul>
+<li><p>调用参数:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">push b   //从右向左入栈</span><br><span class="line">push a</span><br><span class="line">call function   //调用函数</span><br><span class="line">add esp, 8    //由调用函数恢复堆栈</span><br></pre></td></tr></table></figure></li>
+<li><p>被调用函数:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">push ebp</span><br><span class="line">mov ebp, esp</span><br><span class="line">mov eax, [ebp+8H]</span><br><span class="line">add eax, [ebp+0CH]</span><br><span class="line">mov esp, ebp</span><br><span class="line">pop ebp</span><br><span class="line">ret  //注意这里没有修改堆栈</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>函数名在符号表中被记作:<strong>_function</strong></p>
+</li>
+</ul>
+<h3 id="fastcall调用约定"><a href="#fastcall调用约定" class="headerlink" title="fastcall调用约定"></a>fastcall调用约定</h3><ul>
+<li>fastcall调用约定:<ol>
+<li>调用函数时被调用函数的第一个和第二个dword参数(或者更小的)通过ecx和edx转递</li>
+<li>其他参数通过从右往左的顺序压栈</li>
+<li>由被调用函数清理堆栈</li>
+<li>函数名修改规则同stdcall</li>
+</ol>
+</li>
+</ul>
+<h3 id="thiscall调用约定"><a href="#thiscall调用约定" class="headerlink" title="thiscall调用约定"></a>thiscall调用约定</h3><ul>
+<li>thiscall调用约定是唯一一个不能明确指明的函数修饰,因为thiscall不是关键字,是C++类成员函数缺省的调用约定,由于成员函数调用还有一个this指针,因此必须特殊处理:<ol>
+<li>参数从右往左入栈</li>
+<li>如果参数的个数确定,this指针通过exc传递给被调用者;如果参数个数不确定,this指针在所有参数压栈后被压入堆栈</li>
+<li>对参数个数不确定的调用者清理堆栈,否则函数自己清理堆栈</li>
+</ol>
+</li>
+<li>参数个数固定的情况下,类似于stdcall,参数个数不定的情况下,类似cdecl</li>
+</ul>
+<h3 id="nakedcall调用约定"><a href="#nakedcall调用约定" class="headerlink" title="nakedcall调用约定"></a>nakedcall调用约定</h3><ul>
+<li><p>nakedcall调用约定很少见,一般程序设计建议不要使用,编译器不会给这种函数增加初始化和清理代码,同时,不能哟个return返回返回值,需要插入汇编返回结果,一般用于实模式驱动程序设计</p>
+</li>
+<li><p>这个修饰适合__stdcall以及cdecl结合使用</p>
+<ul>
+<li><p>与__stdcall结合</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">__declspec(naked) <span class="function"><span class="keyword">int</span> __stdcall <span class="title">function</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm mov eax, a</span><br><span class="line">    __asm add eax, b</span><br><span class="line">    __asm ret <span class="number">8</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>汇编(被调用函数):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov eax, [ebp+8]</span><br><span class="line">add eax, [ebp+12]</span><br><span class="line">ret 8</span><br></pre></td></tr></table></figure></li>
+<li><p>与cdecl结合</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">__declspec(naked) <span class="function"><span class="keyword">int</span> __stdcall <span class="title">function</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __asm mov eax, a</span><br><span class="line">    __asm add eax, b</span><br><span class="line">    __asm ret</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>汇编(被调用函数):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov eax, [ebp+8]</span><br><span class="line">add eax, [ebp+12]</span><br><span class="line">ret</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>这种函数调用约定,在函数被调用的时候,和普通的cdecl和stdcall相同</p>
+</li>
+</ul>
+<h2 id="x64函数调用约定"><a href="#x64函数调用约定" class="headerlink" title="x64函数调用约定"></a>x64函数调用约定</h2><ul>
+<li>x64架构相比x86架构主要是将所有原来的寄存器扩大了一倍eax扩充成rax,同时形成了R8~R15这8个64位寄存器</li>
+<li>x64下的调用约定只有一种就是<strong>fastcall</strong>,但是Windows和Linux下有所不同</li>
+</ul>
+<h3 id="Windows下的x64调用约定"><a href="#Windows下的x64调用约定" class="headerlink" title="Windows下的x64调用约定"></a>Windows下的x64调用约定</h3><ul>
+<li>Windows的x64下只有一种函数调用约定,即__fastcall,其他调用约定的关键字会被忽略</li>
+<li>一个函数在调用的时候,前四个参数从左至右,依次放入RCX,RDX,R8,R9寄存器中,剩下的参数通过栈传递,从右至左依次入栈</li>
+<li>如果是浮点类型的参数,从左到右由XMM0,XMM1,XMM2,XMM3依次传递,然后剩下的参数通过栈传递,从右到左顺序入栈</li>
+<li>调用函数负责在栈上分配32字节的”shadow space”,用于存放那四个调用参数寄存器的值(前四个调用参数)</li>
+<li>小于64位(bit)的参数传递时高位不填充零,如果时结构体或者union如果大小位1,2,4,8字节用值传递,大样图8字节必须按照地址(指针传递)</li>
+<li>被调用函数的返回值时64位以内(包括64位)的整形或指针时,返回值会被存放在RAX</li>
+<li>如果返回值时浮点型,则返回值存放在XMM0</li>
+<li>更大的返回值,比如结构体,由调用函数在栈上分配空间,并由RCX持有该空间的指针并传递给被调用函数,因此整型参数使用的寄存器依次右移一个实际可利用的寄存器位RDX, R8, R9三个寄存器,其余参数通过栈传递,函数调用结束后,RAX返回空间的指针,即函数调用开始时RCX的值</li>
+<li>调用函数负责清理栈,被调用函数不用清理栈</li>
+<li>除了RCX,RDX,R8,R9以外, RAX,R10,R11和XMM5,XMM6也是”易挥发的”不用特别保护,其余寄存器需要保护,(x86下只有eax, ecx, edx是易挥发的)</li>
+<li>栈需要16字节对齐,call指令会入栈一个8字节的函数返回地址,这样一来栈就对不齐了,(因为RCX,RDX,R8,R9四个寄存器刚好是32个字节,是16字节对齐的,多出来了8个字节)所以所有非叶子节点调用的函数,都必须调整RSP的地址位16n+8,来使栈对齐</li>
+<li>对于R8~R15 的寄存器,我们可以使用r8,r8d,r8w,r8b来分别代表,r8寄存器的64位, 低32位, 低16位和低8位</li>
+<li>x64下系统会为main函数开辟一个很大的栈区,但是main函数并未消耗掉这么大的栈区空间,这个时候,子函数就会继续利用main函数的预留的栈区空间,所以main函数或者其他被main函数调用的函数,并不会对子函数的栈区空间进行清理</li>
+</ul>
+<h3 id="Linux下的x64调用约定"><a href="#Linux下的x64调用约定" class="headerlink" title="Linux下的x64调用约定"></a>Linux下的x64调用约定</h3><ul>
+<li>LInux下的调用约定叫做”System V AMD64 ABI”,此约定主要是在Solaris,GNU/Linux, FreeBSD和其他非微软OS上使用</li>
+<li>Linux的x64下也只有__fastcall调用约定,其他关键字都会被忽略</li>
+<li>一个函数在调用的时候,如果参数个数小于等于6个时,前6个参数时从左至右依次存放于RDI, RSI, RDX, RCX, R8, R9寄存器,剩下的参数通过栈传递,从右至左顺序入栈</li>
+<li>如果参数的个数大于6个时前五个参数是从左至右依次存放于RDI,RSI,RDX,RCX,RAX寄存器里,剩下的参数通过栈传递,从右向左依次入栈</li>
+<li>对于系统调用用R10代替RCX</li>
+<li>XMM0~XMM7用于传递浮点参数</li>
+<li>小于64位(bit)的参数传递时高位不填充零,如果时结构体或者union如果大小位1,2,4,8字节用值传递,大样图8字节必须按照地址(指针传递)</li>
+<li>被调用函数的返回值是64为以内的整型或指针时,返回值会被存放在RAX,如果返回值时128为的则高64位放入RDX</li>
+<li>如果返回值时浮点型,放在XMM0</li>
+<li>更大的返回值,由调用方在栈上分配空间,并由RCX持有该空间的指针并传递给被调用函数因此 ,整型参数使用的寄存器依次右移一个,实际只可以利用RDI,RSI,RDX,R8,R9 5个寄存器,其余参数通过栈传递,函数调用结束后,RAX返回该控件的指针(即函数调用开始时的RCX的值)</li>
+<li>可选的, 被调用函数推入RBP,以使caller-return-rip在其上方8个字节,并将RBP设置为已经保存的RBP地址,这允许遍历现有堆栈帧通过指令GCC的-fomit-frame-pointer选项可以消除此问题</li>
+<li>调用者清理栈,被调用函数不需要清理栈</li>
+<li>除了RDI,RSI,RDX,RCX,R8,R9意外RAX,R10,R11也是易挥发的不需要特别保护,其余寄存器需要保护</li>
+<li>在调用call指令之前,必须保证堆栈是16字节对齐的</li>
+<li>对于R8~R15 的寄存器,我们可以使用r8,r8d,r8w,r8b来分别代表,r8寄存器的64位, 低32位, 低16位和低8位</li>
+</ul>
+<h2 id="printf函数"><a href="#printf函数" class="headerlink" title="printf函数"></a>printf函数</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意到相同的程序,用windows和linux两个系统编译的可执行文件,反编译得到的结果不同(Windows 10 MinGW和ubuntu18 gcc)<ul>
+<li>装载的库不同</li>
+<li>反编译后的汇编也不同</li>
+</ul>
+</li>
+</ul>
+<p><strong>linux:</strong></p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">push</span>    <span class="built_in">rbp</span></span><br><span class="line"><span class="keyword">mov</span>     <span class="built_in">rbp</span>, <span class="built_in">rsp</span></span><br><span class="line"><span class="keyword">lea</span>     <span class="built_in">rdi</span>, format     <span class="comment">; &quot;hello world!&quot;</span></span><br><span class="line"><span class="keyword">mov</span>     <span class="built_in">eax</span>, <span class="number">0</span></span><br><span class="line"><span class="keyword">call</span>    _printf</span><br><span class="line"><span class="keyword">mov</span>     <span class="built_in">eax</span>, <span class="number">0</span></span><br><span class="line"><span class="keyword">pop</span>     <span class="built_in">rbp</span></span><br><span class="line"><span class="keyword">retn</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/8086/" rel="tag"># 8086</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/18/%E6%A0%88%E6%BA%A2%E5%87%BA/" rel="prev" title="栈溢出">
+      <i class="fa fa-chevron-left"></i> 栈溢出
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/21/%E6%98%9F%E7%9B%9Fpwn%E5%85%A5%E9%97%A8/" rel="next" title="星盟pwn入门">
+      星盟pwn入门 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzE3MS8yOTY0Nw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#x86%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="nav-number">1.</span> <span class="nav-text">x86函数调用约定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stdcall%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="nav-number">1.1.</span> <span class="nav-text">stdcall调用约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cdecl%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="nav-number">1.2.</span> <span class="nav-text">cdecl调用约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fastcall%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="nav-number">1.3.</span> <span class="nav-text">fastcall调用约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thiscall%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="nav-number">1.4.</span> <span class="nav-text">thiscall调用约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nakedcall%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="nav-number">1.5.</span> <span class="nav-text">nakedcall调用约定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#x64%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text">x64函数调用约定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows%E4%B8%8B%E7%9A%84x64%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="nav-number">2.1.</span> <span class="nav-text">Windows下的x64调用约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E4%B8%8B%E7%9A%84x64%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A"><span class="nav-number">2.2.</span> <span class="nav-text">Linux下的x64调用约定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#printf%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">printf函数</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="STEVE"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">STEVE</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Mon Apr 05 2021 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">STEVE</span>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
